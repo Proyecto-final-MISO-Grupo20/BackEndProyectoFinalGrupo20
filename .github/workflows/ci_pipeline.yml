@@ -5,7 +5,6 @@ on:
     branches: 
       - main
       - develop
-      - feature-**
 jobs:
   users-unit-tests:
     runs-on: ubuntu-latest
@@ -25,5 +24,5 @@ jobs:
         working-directory: ./auth
         run: |
          coverage run -m unittest discover -s tests
-          coverage report -m --fail-under=80
+         coverage report -m --fail-under=80
 
