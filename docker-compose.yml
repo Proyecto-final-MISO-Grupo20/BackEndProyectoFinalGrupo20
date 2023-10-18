@@ -3,7 +3,7 @@ services:
   auth-microservice:
     container_name: auth-microservice
     ports:
-      - "3000:3000"
+      - "3001:3000"
     build: ./auth
     working_dir: /auth_microservice/
     environment:

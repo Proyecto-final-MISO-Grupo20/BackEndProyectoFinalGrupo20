@@ -17,7 +17,7 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: /users
+        path: /auth
         backend:
           service:
             name: auth-microservice
