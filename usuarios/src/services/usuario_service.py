@@ -17,10 +17,13 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
                             detail='The request not contains all required data')
 
     try:
+        print('---------------------------------------------------')
+        print(data.get('username'))
         # Llama al método get_by_username para buscar el usuario por nombre de usuario
         user = await Usuario.get_by_username(username=data.get('username'))
         
         if user:
+            print(user)
             raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
                             detail='El username ya esta relacionado a un usuario.')
         else:
@@ -41,7 +44,7 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
             
 
     except Exception as exception:
-        raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED,
-                            detail=f'{exception}')
+        raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
+                            detail='El username ya esta relacionado a un usuario.')
 
     return ResponseDto(body, status_code)

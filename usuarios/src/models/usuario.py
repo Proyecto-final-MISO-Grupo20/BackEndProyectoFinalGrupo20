@@ -20,9 +20,7 @@ class Usuario(Model):
     @classmethod
     async def get_by_username(cls, username):
         try:
-            print('paso por aca - 1')
             user = await cls.filter(username=username)
-            print(user)
             return user
         except DoesNotExist:
             return None
