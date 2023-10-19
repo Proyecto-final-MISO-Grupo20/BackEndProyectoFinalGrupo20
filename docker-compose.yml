@@ -6,18 +6,19 @@ services:
       - "3001:3000"
     build: ./auth
     working_dir: /auth_microservice/
-    env_file: .env
+    env_file: ./auth/.env
     depends_on:
       - ABCJobs_db
     networks:
       - app-network
+      
   usuarios-microservice:
     container_name: usuarios-microservice
     ports:
       - "3002:3000"
     build: ./usuarios
     working_dir: /usuarios_microservice/
-    env_file: .env
+    env_file: ./usuarios/.env
     depends_on:
       - ABCJobs_db
     networks:

@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity, jwt_required, create_access_token
 from werkzeug.security import check_password_hash
 
-from models.user import User
+from models.usuario import Usuario
 from services.user_service import get_auth_by_id
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -17,7 +17,7 @@ def login():
     except Exception as e:
         return jsonify({'error': 'La petición no contiene todos los campos requeridos.'}), 400
 
-    user = User.find_by_username(data['username'])
+    user = Usuario.find_by_username(data['username'])
 
     if user and check_password_hash(user.password, data['password']):
         token = create_access_token(identity=user.id)

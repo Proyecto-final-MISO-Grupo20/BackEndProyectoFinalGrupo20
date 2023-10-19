@@ -4,7 +4,7 @@ RUN groupadd -r user && useradd -r -g user user
 
 EXPOSE 3000
 
-WORKDIR /offers_microservice
+WORKDIR /usuarios_microservice
 
 ADD requirements.txt ./
 
