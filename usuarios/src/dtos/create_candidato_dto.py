@@ -7,7 +7,7 @@ class CreateCandidatoDto:
 
     nombre: str
     tipoDocumento: int
-    documento: int
+    documento: str
     username: str
     password: str
     email: str

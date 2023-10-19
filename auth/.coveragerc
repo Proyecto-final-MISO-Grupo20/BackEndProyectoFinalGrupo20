@@ -1,0 +1,5 @@
+[run]
+omit = 
+    /usr/lib/*
+    models/base_model.py
+    helpers/utils.py

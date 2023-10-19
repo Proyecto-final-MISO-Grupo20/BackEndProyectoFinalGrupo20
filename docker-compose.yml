@@ -1,0 +1,36 @@
+version: '3'
+services:
+  auth-microservice:
+    container_name: auth-microservice
+    ports:
+      - "3001:3000"
+    build: ./auth
+    working_dir: /auth_microservice/
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@users_db/auth
+    depends_on:
+      - users_db
+    networks:
+      - auth-network
+      - app-network
+
+  users_db:
+    container_name: users_db
+    image:
+      postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=auth
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./auth/:/db/
+    networks:
+      - auth-network
+
+networks:
+  auth-network:
+    driver: bridge
+  app-network:
+    driver: bridge

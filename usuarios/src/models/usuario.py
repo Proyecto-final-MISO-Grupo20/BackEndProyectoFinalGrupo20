@@ -8,7 +8,7 @@ class Usuario(Model):
     id = IntField(pk=True)
     nombre = CharField(max_length=150)
     tipoDocumento = IntField()
-    documento = IntField()
+    documento = CharField(max_length=25)
     username = CharField(max_length=25)
     password = CharField(max_length=30)
     email = CharField(max_length=255)

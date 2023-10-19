@@ -21,7 +21,7 @@ def test_create_candidato_controller(mock_create_candidato):
     usuario_data = {
         "nombre": "Juan Jose Ochoa Ortiz",
         "tipoDocumento": 1,
-        "documento": 1234567,
+        "documento": "1234567",
         "username": "juanochoa",
         "password": "password",
         "email": "ejemplo@ejemplo.com",
