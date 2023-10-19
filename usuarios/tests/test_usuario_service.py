@@ -12,12 +12,12 @@ async def test_create_usuario():
 
     test_response = await usuario_service.create_candidato({
             "nombre": "Juan Jose Ochoa Ortiz",
-            "tipoDocumento": 1,
+            "tipo_documento": 1,
             "documento": 1234567,
             "username": "juanochoa",
             "password": "password",
             "email": "ejemplo@ejemplo.com",
-            "fechaNacimiento": 20230601,
+            "fecha_nacimiento": 20230601,
             "telefono": 123456,
             "pais": "Colombia",
             "ciudad": "Bogota"
@@ -32,12 +32,12 @@ async def test_create_usuario_faltan_campos():
     with pytest.raises(HTTPException) as exc_info:
         await usuario_service.create_candidato({
             "nombre": "Juan Jose Ochoa Ortiz",
-            "tipoDocumento": 1,
+            "tipo_documento": 1,
             "documento": "1234567",
             "username": "juanochoa",
             "password": "password",
             "email": "ejemplo@ejemplo.com",
-            "fechaNacimiento": 20230601,
+            "fecha_nacimiento": 20230601,
             "telefono": 123456,
             "pais": "Colombia"
         })
@@ -52,12 +52,12 @@ async def test_create_usuario_con_username_repetido():
     # Primera llamada para crear un usuario
     await usuario_service.create_candidato({
         "nombre": "Juan Jose Ochoa Ortiz",
-        "tipoDocumento": 1,
+        "tipo_documento": 1,
         "documento": "1234567",
         "username": "juanochoa1",
         "password": "password",
         "email": "ejemplo@ejemplo.com",
-        "fechaNacimiento": 20230601,
+        "fecha_nacimiento": 20230601,
         "telefono": 123456,
         "pais": "Colombia",
         "ciudad": "Bogota"
@@ -67,12 +67,12 @@ async def test_create_usuario_con_username_repetido():
     with pytest.raises(HTTPException) as exc_info:
         await usuario_service.create_candidato({
             "nombre": "Otro Nombre",
-            "tipoDocumento": 2,
+            "tipo_documento": 2,
             "documento": "1234567",
             "username": "juanochoa1",
             "password": "password2",
             "email": "otro@ejemplo.com",
-            "fechaNacimiento": 20230602,
+            "fecha_nacimiento": 20230602,
             "telefono": 654321,
             "pais": "Colombia",
             "ciudad": "Medellin"

@@ -8,7 +8,7 @@ def get_auth_by_id(id: int):
     try:
         user = Usuario.find_by_id(id)
         message = object_as_dict(user)
-    except Exception as e:
+    except Exception:
         status = 400
         message = {'Error': "El token no es válido o está vencido."}
 
