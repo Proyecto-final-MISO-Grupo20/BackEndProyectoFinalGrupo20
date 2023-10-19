@@ -16,5 +16,5 @@ class CreateCandidatoDto:
     pais: str
     ciudad: str
 
-    def get_attributes():
+    def get_attributes(self):
         return[key.name for key in dataclasses.fields(CreateCandidatoDto)]

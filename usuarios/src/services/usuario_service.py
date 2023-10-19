@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 from src.dtos import *
 from src.models import Candidato, Usuario
+from werkzeug.security import generate_password_hash
 
 
 async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
@@ -10,7 +11,7 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
     status_code: HTTPStatus = HTTPStatus.CREATED
 
     data_keys = [key for key in data]
-    candidato_keys = CreateCandidatoDto.get_attributes()
+    candidato_keys = CreateCandidatoDto.get_attributes(None)
 
     if not all(key in data_keys for key in candidato_keys):
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
@@ -27,9 +28,12 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
             raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
                             detail='El username ya esta relacionado a un usuario.')
         else:
+
+            encrypted_password = generate_password_hash(data.get('password'))
+
             usuario = Usuario(nombre=data.get('nombre'),
                           tipoDocumento=data.get('tipoDocumento'), documento=data.get('documento'),
-                          username=data.get('username'), password=data.get('password'), 
+                          username=data.get('username'), password=encrypted_password, 
                           email=data.get('email'), rol=3)
 
             await usuario.save()
