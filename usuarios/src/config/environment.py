@@ -1,4 +1,4 @@
 import os
 
-DATABASE_URL: str = os.getenv('DATABASE_URL').replace('postgresql', 'postgres')
+DATABASE_URL: str = os.environ.get('DATABASE_URL')
 AUTH_SERVICE: str = f"http://{os.getenv('USERS_PATH')}"
