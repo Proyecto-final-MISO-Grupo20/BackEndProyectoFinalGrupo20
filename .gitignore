@@ -10,4 +10,4 @@
 .vscode
 .idea/*
 
-cloud-sql-proxy
+.env

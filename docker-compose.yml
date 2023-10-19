@@ -6,31 +6,39 @@ services:
       - "3001:3000"
     build: ./auth
     working_dir: /auth_microservice/
-    environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@users_db/auth
+    env_file: ./auth/.env
     depends_on:
-      - users_db
+      - ABCJobs_db
     networks:
-      - auth-network
+      - app-network
+      
+  usuarios-microservice:
+    container_name: usuarios-microservice
+    ports:
+      - "3002:3000"
+    build: ./usuarios
+    working_dir: /usuarios_microservice/
+    env_file: ./usuarios/.env
+    depends_on:
+      - ABCJobs_db
+    networks:
       - app-network
 
-  users_db:
-    container_name: users_db
+  ABCJobs_db:
+    container_name: ABCJobs_db
     image:
       postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=auth
+      - POSTGRES_DB=ABCJobs
     ports:
       - '5432:5432'
     volumes:
-      - ./auth/:/db/
+      - ./ABCJobs/:/db/
     networks:
-      - auth-network
+      - app-network
 
 networks:
-  auth-network:
-    driver: bridge
   app-network:
     driver: bridge
