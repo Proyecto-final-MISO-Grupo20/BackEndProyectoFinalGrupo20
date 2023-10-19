@@ -5,10 +5,10 @@ from werkzeug.security import check_password_hash
 from models.user import User
 from services.user_service import get_auth_by_id
 
-auth = Blueprint('users', __name__, url_prefix='/users')
+auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@auth.route('/auth', methods=['POST'])
+@auth.route('/login', methods=['POST'])
 def login():
     data = request.json
     try:
