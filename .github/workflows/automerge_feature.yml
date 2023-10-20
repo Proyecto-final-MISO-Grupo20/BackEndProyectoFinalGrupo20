@@ -66,6 +66,7 @@ jobs:
           coverage run -m pytest -s tests
           coverage report -m 
           coverage xml -o coverage-reports/coverage-usuarios.xml
+          cd coverage-reports
           ls -l 
       - name: Validar resultado con errores
         if: ${{ failure() }}
