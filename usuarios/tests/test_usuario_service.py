@@ -6,6 +6,9 @@ from src.services import usuario_service
 from fastapi.exceptions import HTTPException
 
 
+
+
+
 @pytest.mark.asyncio
 async def test_create_usuario():
     await init()
@@ -22,8 +25,10 @@ async def test_create_usuario():
             "pais": "Colombia",
             "ciudad": "Bogota"
         })
-
+    
     assert test_response.status_code == HTTPStatus.CREATED
+
+    await close()
 
 @pytest.mark.asyncio
 async def test_create_usuario_faltan_campos():
@@ -43,7 +48,9 @@ async def test_create_usuario_faltan_campos():
         })
 
     # Verifica el código de estado HTTP de la excepción
-    assert exc_info.value.status_code == 400    
+    assert exc_info.value.status_code == 400   
+
+    await close() 
 
 @pytest.mark.asyncio
 async def test_create_usuario_con_username_repetido():
@@ -80,3 +87,5 @@ async def test_create_usuario_con_username_repetido():
 
     # Verifica que se haya lanzado una excepción HTTPException con código 400 (Bad Request)
     assert exc_info.value.status_code == 400
+
+    await close()
