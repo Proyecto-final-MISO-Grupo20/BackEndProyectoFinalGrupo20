@@ -65,6 +65,7 @@ jobs:
         run: |
           coverage run -m pytest -s tests
           coverage report -m --fail-under=80
+          coverage xml
       - name: Validar resultado con errores
         if: ${{ failure() }}
         env:
@@ -76,6 +77,11 @@ jobs:
         env:
           MENSAJE_MERGE: correcto
         run: echo "::set-output name=respuesta::${MENSAJE_MERGE}"
+      - name: Generate Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Cobertura
+          path: ./artifacts/coverage.xml
   
   sonarcloud:
     needs: [trigger, update, test]
