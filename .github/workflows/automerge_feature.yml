@@ -48,7 +48,7 @@ jobs:
     outputs:
       green: ${{ steps.correcto.outputs.respuesta }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Configuración de entorno de python
         uses: actions/setup-python@v2
         with:
@@ -70,6 +70,8 @@ jobs:
           ls -l 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
