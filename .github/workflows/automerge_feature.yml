@@ -68,6 +68,17 @@ jobs:
           coverage xml -o coverage-reports/coverage-usuarios.xml
           cd coverage-reports
           ls -l 
+      - name: SonarCloud
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v3
+            with:
+              fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          - name: SonarCloud Scan
+            uses: SonarSource/sonarcloud-github-action@master
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Validar resultado con errores
         if: ${{ failure() }}
         env:
@@ -79,25 +90,8 @@ jobs:
         env:
           MENSAJE_MERGE: correcto
         run: echo "::set-output name=respuesta::${MENSAJE_MERGE}"
-      - name: Generate Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: Cobertura
-          path: coverage-reports/coverage-usuarios.xml
+
   
-  sonarcloud:
-    needs: [trigger, update, test]
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   commit-message:
     needs: [trigger, update, test]
