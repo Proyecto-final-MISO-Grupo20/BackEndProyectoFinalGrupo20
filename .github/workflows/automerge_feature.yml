@@ -58,6 +58,7 @@ jobs:
         run: |
           pip install pipenv
           pipenv sync --system --dev
+          pip install -r requirements.txt
           export VIRTUAL_ENV="$(pipenv --venv)" PATH="$(pipenv --venv)/bin:$PATH"
       - name: Run unit tests
         working-directory: ./usuarios
