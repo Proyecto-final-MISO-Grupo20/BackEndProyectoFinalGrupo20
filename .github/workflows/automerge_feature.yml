@@ -68,13 +68,7 @@ jobs:
           coverage xml -o coverage-reports/coverage-usuarios.xml
           cd coverage-reports
           ls -l 
-      - name: SonarCloud
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v3
-            with:
-              fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-          - name: SonarCloud Scan
+      - name: SonarCloud Scan
             uses: SonarSource/sonarcloud-github-action@master
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
