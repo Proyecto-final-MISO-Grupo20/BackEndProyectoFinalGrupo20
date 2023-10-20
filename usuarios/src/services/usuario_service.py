@@ -1,16 +1,17 @@
 from fastapi import HTTPException
 from http import HTTPStatus
 
-from src.dtos import *
+from src.dtos import CreateCandidatoDto, ResponseDto, CreateCandidatoResponseDto
 from src.models import Candidato, Usuario
+from werkzeug.security import generate_password_hash
 
 
 async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
     body: str or dict = ''
-    status_code: HTTPStatus = HTTPStatus.CREATED
+    status_code: int = HTTPStatus.CREATED
 
     data_keys = [key for key in data]
-    candidato_keys = CreateCandidatoDto.get_attributes()
+    candidato_keys = CreateCandidatoDto.get_attributes(None)
 
     if not all(key in data_keys for key in candidato_keys):
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
@@ -27,14 +28,17 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
             raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
                             detail='El username ya esta relacionado a un usuario.')
         else:
+
+            encrypted_password = generate_password_hash(data.get('password'))
+
             usuario = Usuario(nombre=data.get('nombre'),
-                          tipoDocumento=data.get('tipoDocumento'), documento=data.get('documento'),
-                          username=data.get('username'), password=data.get('password'), 
+                          tipo_documento=data.get('tipo_documento'), documento=data.get('documento'),
+                          username=data.get('username'), password=encrypted_password, 
                           email=data.get('email'), rol=3)
 
             await usuario.save()
 
-            candidato = Candidato(fechaNacimiento=data.get('fechaNacimiento'), telefono=data.get('telefono'),
+            candidato = Candidato(fecha_nacimiento=data.get('fecha_nacimiento'), telefono=data.get('telefono'),
                             pais=data.get('pais'), ciudad=data.get('ciudad'),
                             usuarioId=usuario.id)
 
@@ -43,7 +47,7 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
             body = CreateCandidatoResponseDto(usuario.username)
             
 
-    except Exception as exception:
+    except Exception:
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
                             detail='El username ya esta relacionado a un usuario.')
 

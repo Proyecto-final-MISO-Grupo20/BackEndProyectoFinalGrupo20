@@ -2,9 +2,8 @@ from datetime import timedelta
 from flask import Flask
 
 from controllers.auth_controller import auth
-from config import *
+from config import DATABASE_URL, JWT_SECRET_KEY
 from database import db
-from models import *
 
 
 def initialize_database(app: Flask) -> None:

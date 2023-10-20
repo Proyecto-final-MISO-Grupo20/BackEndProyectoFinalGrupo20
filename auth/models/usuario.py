@@ -8,7 +8,7 @@ USER_ID_SEQ = Sequence('user_id_seq')
 class Usuario(BaseModel):
     id = db.Column(db.Integer, USER_ID_SEQ, primary_key=True, autoincrement=True)
     nombre = db.Column(db.String, unique=False, nullable=False)
-    tipoDocumento = db.db.Column(db.Integer, unique=False, nullable=False)
+    tipo_documento = db.db.Column(db.Integer, unique=False, nullable=False)
     documento = db.Column(db.String, unique=True, nullable=False)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)

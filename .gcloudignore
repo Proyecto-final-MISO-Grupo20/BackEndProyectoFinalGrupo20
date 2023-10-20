@@ -12,6 +12,7 @@
 # below:
 .git
 .gitignore
+test_db*
 
 node_modules
 #!include:.gitignore
