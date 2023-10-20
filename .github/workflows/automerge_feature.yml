@@ -66,6 +66,9 @@ jobs:
           coverage run -m pytest -s tests
           coverage report -m --fail-under=80
           coverage xml
+          mkdir coverage-reports
+          mv coverage.xml coverage-reports/coverage-usuarios.xml
+
       - name: Validar resultado con errores
         if: ${{ failure() }}
         env:
@@ -81,7 +84,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Cobertura
-          path: ./artifacts/coverage.xml
+          path: coverage.xml
   
   sonarcloud:
     needs: [trigger, update, test]
