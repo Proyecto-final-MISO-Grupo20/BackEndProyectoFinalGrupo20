@@ -69,10 +69,10 @@ jobs:
           cd coverage-reports
           ls -l 
       - name: SonarCloud Scan
-            uses: SonarSource/sonarcloud-github-action@master
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Validar resultado con errores
         if: ${{ failure() }}
         env:
