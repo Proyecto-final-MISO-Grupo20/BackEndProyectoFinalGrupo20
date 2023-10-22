@@ -3,17 +3,18 @@ name: "Automerge microservice Usuarios"
 on:
   push:
     branches:
+      - main
+      - develop
       - 'feature-**'
     paths:
       - 'usuarios/**'
-  # workflow_dispatch:
 
 jobs:
   unit-test:
     name: Run unit tests
     runs-on: ubuntu-latest
     outputs:
-      test-coverage: ${{ steps.test-coverage.outputs.respuesta }}
+      test-coverage: ${{ steps.test-coverage.outputs.success }}
     steps:
       - uses: actions/checkout@main
       - name: Configuración de entorno de python
@@ -42,7 +43,7 @@ jobs:
       - name: Validar resultado de coverage
         id: test-coverage
         if: ${{ success() }}
-        run: echo "respuesta=correcto" >> $GITHUB_OUTPUT
+        run: echo "success=true" >> $GITHUB_OUTPUT
       - name: Crear mensaje de error
         if: ${{ failure() }}
         run: echo "mensaje="La cobertura de pruebas es menor a 80%" >> $GITHUB_OUTPUT
@@ -85,7 +86,7 @@ jobs:
     needs: update
     name: Merge de feature en develop
     runs-on: ubuntu-latest
-    if: ${{ needs.test-coverage.outputs.coverage == 'correcto' }}
+    if: ${{ needs.unit-test.outputs.test-coverage }}
     steps:
       - name: Mezcla feature -> develop
         uses: tukasz/direct-merge-action@master
