@@ -36,18 +36,15 @@ jobs:
           coverage run -m pytest -s tests
           coverage report -m --fail-under=80
           coverage xml -o coverage.xml
+      - name: Validar resultado de coverage
+        id: test-coverage
+        if: ${{ success() }}
+        run: echo "success=true" >> $GITHUB_OUTPUT
       - name: Upload coverage report
         uses: actions/upload-artifact@main
         with:
           name: coverage-report
           path: usuarios/coverage.xml
-      - name: Validar resultado de coverage
-        id: test-coverage
-        if: ${{ success() }}
-        run: echo "success=true" >> $GITHUB_OUTPUT
-      - name: Crear mensaje de error
-        if: ${{ failure() }}
-        run: echo "mensaje="La cobertura de pruebas es menor a 80%" >> $GITHUB_OUTPUT
 
   sonarcloud:
     uses: ./.github/workflows/sonarcloud.yml
@@ -57,21 +54,12 @@ jobs:
     secrets:
       sonar_token: ${{ secrets.SONAR_TOKEN }}
 
-  update:
+  update-feature-branch:
+    uses: ./.github/workflows/update-feature-branch.yml
     needs: sonarcloud
-    name: Merge de develop en feature
-    runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, '(Terminada)') }}
-    steps:
-      - name: Mezcla develop -> feature
-        uses: tukasz/direct-merge-action@master
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          source-branch: develop
-          target-branch: ${{ github.ref }}
 
   merge:
-    needs: update
+    needs: update-feature-branch
     name: Merge de feature en develop
     runs-on: ubuntu-latest
     if: ${{ needs.unit-test.outputs.test-coverage }}
