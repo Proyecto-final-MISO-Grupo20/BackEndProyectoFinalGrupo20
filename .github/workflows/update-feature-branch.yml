@@ -1,0 +1,17 @@
+name: Update feature branch
+
+on:
+  workflow_call:
+
+jobs:
+  update-branch:
+    name: Merge de develop en feature
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, '(Terminada)') }}
+    steps:
+      - name: Mezcla develop -> feature
+        uses: tukasz/direct-merge-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: develop
+          target-branch: ${{ github.ref }}
