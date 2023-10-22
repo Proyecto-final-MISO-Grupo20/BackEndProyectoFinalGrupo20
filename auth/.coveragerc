@@ -3,3 +3,7 @@ omit =
     /usr/lib/*
     models/base_model.py
     helpers/utils.py
+    kubernetes/*
+
+relative_files = True
+branch = True
