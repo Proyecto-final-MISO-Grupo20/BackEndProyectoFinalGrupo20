@@ -17,7 +17,7 @@ async def test_create_usuario():
             "nombre": "Juan Jose Ochoa Ortiz",
             "tipo_documento": 1,
             "documento": 1234567,
-            "username": "juanochoa",
+            "username": "juanochoa8",
             "password": "password",
             "email": "ejemplo@ejemplo.com",
             "fecha_nacimiento": 20230601,
