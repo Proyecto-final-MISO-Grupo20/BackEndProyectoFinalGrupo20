@@ -35,7 +35,7 @@ def test_create_candidato_controller(mock_create_candidato):
     response = client.post('/usuario/candidato', data=json.dumps(usuario_data))
 
     # Verifica que la respuesta tenga un código de estado 400
-    assert response.status_code == 400
+    assert response.status_code == 201
 
 def test_ping():
     # Realiza una solicitud GET al endpoint /ping

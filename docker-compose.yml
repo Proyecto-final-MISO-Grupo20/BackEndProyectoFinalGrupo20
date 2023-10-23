@@ -1,44 +1,39 @@
-version: '3'
+version: "3"
 services:
   auth-microservice:
     container_name: auth-microservice
-    ports:
-      - "3001:3000"
     build: ./auth
     working_dir: /auth_microservice/
     env_file: ./auth/.env
     depends_on:
       - ABCJobs_db
-    networks:
-      - app-network
-      
+
   usuarios-microservice:
     container_name: usuarios-microservice
-    ports:
-      - "3002:3000"
     build: ./usuarios
     working_dir: /usuarios_microservice/
     env_file: ./usuarios/.env
     depends_on:
       - ABCJobs_db
-    networks:
-      - app-network
 
   ABCJobs_db:
     container_name: ABCJobs_db
-    image:
-      postgres
+    image: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=ABCJobs
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - ./ABCJobs/:/db/
-    networks:
-      - app-network
 
-networks:
-  app-network:
-    driver: bridge
+  nginx:
+    ports:
+      - 3000:80
+    build: ./nginx
+    volumes:
+      - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - auth-microservice
+      - usuarios-microservice
