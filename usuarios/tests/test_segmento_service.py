@@ -9,6 +9,14 @@ from src.models import Segmento
 
 
 
+@pytest.mark.asyncio
+async def test_listar_vacio():
+    await init()
+    test_response = await segmento_service.listar_segmentos()
+    
+    assert test_response.status_code == HTTPStatus.BAD_REQUEST
+
+    await close()
 
 @pytest.mark.asyncio
 async def test_listar():
@@ -20,4 +28,6 @@ async def test_listar():
     assert test_response.status_code == HTTPStatus.CREATED
 
     await close()
+
+
 
