@@ -39,7 +39,7 @@ steps:
   args:
   - '-c'
   - |
-     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" auth/kubernetes.yaml.tpl | \
+     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" auth/kubernetes/kubernetes.yaml.tpl | \
      sed "s/COMMIT_SHA/${SHORT_SHA}/g" > abcjobs-cloudbuild-env/kubernetes.yaml
 
 # This step pushes the manifest back to abcjobs-cloudbuild-env
