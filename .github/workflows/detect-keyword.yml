@@ -1,0 +1,28 @@
+name: Detect keywords
+
+on:
+  workflow_call:
+    outputs:
+      finished-detected:
+        description: ""
+        value: ${{ jobs.trigger.outputs.feature }}
+      release-detected:
+        description: ""
+        value: ${{ jobs.trigger.outputs.release }}
+
+jobs:
+  trigger:
+    name: Detecta palabras clave
+    runs-on: ubuntu-latest
+    outputs:
+      feature: ${{ steps.detect-finished.outputs.finished }}
+      release: ${{ steps.detect-release.outputs.release }}
+    steps:
+      - name: Detect ended feature
+        id: detect-finished
+        if: ${{ contains(github.event.head_commit.message, '[terminada]') }}
+        run: echo "finished=true" >> $GITHUB_OUTPUT
+      - name: Detect release
+        id: detect-release
+        if: ${{ contains(github.event.head_commit.message, '[release]') }}
+        run: echo "release=true" >> $GITHUB_OUTPUT

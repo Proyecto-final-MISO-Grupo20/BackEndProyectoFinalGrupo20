@@ -2,12 +2,19 @@ name: Update feature branch
 
 on:
   workflow_call:
+    inputs:
+      finished-feature:
+        required: true
+        type: string
+      create-release:
+        required: true
+        type: string
 
 jobs:
   update-branch:
-    name: Merge de develop en feature
+    name: Merge develop on feature
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, '(Terminada)') }}
+    if: ${{ inputs.finished-feature == 'true' }} || ${{ inputs.create-release == 'true' }}
     steps:
       - name: Mezcla develop -> feature
         uses: tukasz/direct-merge-action@master

@@ -54,12 +54,40 @@ jobs:
     secrets:
       sonar_token: ${{ secrets.SONAR_TOKEN }}
 
-  update-feature-branch:
-    uses: ./.github/workflows/update-feature-branch.yml
+  detect-keyword:
+    uses: ./.github/workflows/detect-keyword.yml
     needs: sonarcloud
 
+  update-feature-branch:
+    uses: ./.github/workflows/update-feature-branch.yml
+    needs: detect-keyword
+    with:
+      finished-feature: ${{ needs.detect-keyword.outputs.finished-detected }}
+      create-release: ${{ needs.detect-keyword.outputs.release-detected }}
+
+  commit-message:
+    needs: [ detect-keyword, update-feature-branch ]
+    name: Set commit message
+    runs-on: ubuntu-latest
+    outputs:
+      message: ${{ steps.set-feature-message.outputs.message }}${{ steps.set-release-message.outputs.message }}
+    if: ${{ needs.detect-keyword.outputs.feature-detected == 'true' }} || ${{ needs.detect-keyword.outputs.release-detected == 'true' }}
+    steps:
+      - name: Set feature message
+        id: set-feature-message
+        if: ${{ needs.detect-keyword.outputs.feature-detected == 'true' }}
+        env:
+          COMMIT_MESSAGE: Mezcla automática de ${{ github.ref }} en la rama develop
+        run: echo "message=${COMMIT_MESSAGE}" >> $GITHUB_OUTPUT
+      - name: Set release message
+        id: set-release-message
+        if: ${{ needs.detect-keyword.outputs.release-detected == 'true' }}
+        env:
+          COMMIT_MESSAGE: Mezcla automática de ${{ github.ref }} en develop con nuevo [release]
+        run: echo "message=${COMMIT_MESSAGE}" >> $GITHUB_OUTPUT
+
   merge:
-    needs: update-feature-branch
+    needs: [ unit-test, commit-message ]
     name: Merge de feature en develop
     runs-on: ubuntu-latest
     if: ${{ needs.unit-test.outputs.test-coverage }}
@@ -70,4 +98,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           source-branch: ${{ github.ref }}
           target-branch: develop
-          commit-message: Automatic merge of ${{ github.ref }} -> develop
+          commit-message: ${{ needs.commit-message.outputs.message }}

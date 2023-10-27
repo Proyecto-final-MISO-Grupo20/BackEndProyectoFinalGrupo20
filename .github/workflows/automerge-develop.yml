@@ -1,0 +1,31 @@
+name: "Automerge main branch"
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Crea la rama release
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, '[release]') }}
+    steps:
+      - uses: actions/checkout@main
+      - name: Crear rama release
+        run: |
+          git checkout -b release
+          git push -f -u origin release
+
+  merge:
+    needs: release
+    name: Merge de la rama "release" en la rama "main"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mezcla release -> main
+        uses: tukasz/direct-merge-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: release
+          target-branch: main
