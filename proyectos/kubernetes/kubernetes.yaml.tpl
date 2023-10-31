@@ -30,6 +30,8 @@ spec:
               secretKeyRef:
                 name: appsecrets
                 key: usuarios_uri
+          - name: USERS_PATH
+            value: auth-microservice
         imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1
