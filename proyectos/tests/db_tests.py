@@ -1,4 +1,5 @@
 from tortoise import Tortoise
+from src.models import Empresa
 
 
 async def init():
@@ -7,6 +8,11 @@ async def init():
         modules={'models': ['src.models']}
     )
     await Tortoise.generate_schemas()
+
+    empresa = Empresa(tipoEmpresaID=1, segmentoID=1,
+                            usuarioId=1)
+
+    await empresa.save()  
 
 
 async def close():
