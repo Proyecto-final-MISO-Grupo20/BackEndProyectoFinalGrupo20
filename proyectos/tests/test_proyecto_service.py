@@ -25,16 +25,12 @@ async def test_create_proyecto_con_usuario_mal():
 async def test_create_proyecto():
     await init()
 
-    empresa = Empresa(tipoEmpresaID=1, segmentoID=1,
-                            usuarioId=1)
-
-    await empresa.save()  
     # Se crea el proyecto con una empresa correcta
     test_response = await proyecto_service.create_proyecto({
                                                                 "nombre": "Prueba",
                                                                 "descripcion": "Prueba",
                                                                 "codigo": 1234567
-                                                            }, empresa.id)
+                                                            }, 1)
 
     # Verifica que se haya lanzado una excepción HTTPException con código 400 (Bad Request)
     assert test_response.status_code == HTTPStatus.CREATED
