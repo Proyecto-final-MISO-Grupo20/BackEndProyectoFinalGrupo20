@@ -23,3 +23,17 @@ spec:
             name: auth-microservice
             port: 
               number: 80
+      - pathType: Prefix
+        path: /usuario
+        backend:
+          service:
+            name: usuarios-microservice
+            port:
+              number: 80
+      - pathType: Prefix
+        path: /proyecto
+        backend:
+          service:
+            name: proyectos-microservice
+            port:
+              number: 80
