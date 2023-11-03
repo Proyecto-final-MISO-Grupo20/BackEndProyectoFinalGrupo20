@@ -1,25 +1,25 @@
 ###################################
-# auth
+# usuarios
 ###################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth
+  name: usuarios
   labels:
-    app: auth
+    app: usuarios
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: usuarios
   template:
     metadata:
       labels:
-        app: auth
+        app: usuarios
     spec:
       containers:
-        - name: auth
-          image: us-central1-docker.pkg.dev/abc-jobs-402104/abc-jobs-repository/auth
+        - name: usuarios
+          image: us-central1-docker.pkg.dev/abc-jobs-402104/abc-jobs-repository/usuarios
           ports:
             - containerPort: 3000
           env:
@@ -32,35 +32,35 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: appsecrets
-                  key: auth_uri
+                  key: usuarios_uri
           imagePullPolicy: Always
 
 ---
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: auth-config
+  name: usuarios-config
 spec:
   healthCheck:
     checkIntervalSec: 30
     port: 3000
     type: HTTP
-    requestPath: /auth/ping
+    requestPath: /usuarios/ping
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: auth-microservice
+  name: usuarios-microservice
   annotations:
-    cloud.google.com/backend-config: '{"default": "auth-config"}'
+    cloud.google.com/backend-config: '{"default": "usuarios-config"}'
 spec:
   type: NodePort
   selector:
-    app: auth
+    app: usuarios
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
-      nodePort: 31019
+      nodePort: 31015
 
 ---

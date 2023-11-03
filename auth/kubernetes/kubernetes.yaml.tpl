@@ -1,6 +1,3 @@
-###################################
-# auth
-###################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,23 +15,22 @@ spec:
         app: auth
     spec:
       containers:
-        - name: auth
-          image: us-central1-docker.pkg.dev/abc-jobs-402104/abc-jobs-repository/auth
-          ports:
-            - containerPort: 3000
-          env:
-            - name: JWT_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: jwt_secret_key
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: auth_uri
-          imagePullPolicy: Always
-
+      - name: auth
+        image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/abc-jobs-repository/auth:COMMIT_SHA
+        ports:
+          - containerPort: 3000
+        env:
+          - name: JWT_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: appsecrets
+                key: jwt_secret_key
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: appsecrets
+                key: auth_uri
+        imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
@@ -62,5 +58,3 @@ spec:
       port: 80
       targetPort: 3000
       nodePort: 31019
-
----

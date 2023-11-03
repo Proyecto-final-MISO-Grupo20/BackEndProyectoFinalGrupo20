@@ -45,5 +45,3 @@ docker-compose exec auth-microservice coverage run -m --omit="*/usr/lib/*" unitt
 ```bash
 docker-compose exec auth-microservice coverage report -m --fail-under=80
 ```
-
-
