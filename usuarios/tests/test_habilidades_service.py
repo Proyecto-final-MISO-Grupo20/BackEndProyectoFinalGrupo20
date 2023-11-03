@@ -21,6 +21,7 @@ async def test_listar_vacio():
 
 @pytest.mark.asyncio
 async def test_listar():
+    await test_listar_vacio()
     await init()
     habilidades = Habilidades(habilidad = 'prueba', tipoHabilidad = 1)
     await habilidades.save()
