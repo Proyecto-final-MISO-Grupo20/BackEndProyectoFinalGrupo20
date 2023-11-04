@@ -15,6 +15,14 @@ services:
     env_file: ./usuarios/.env
     depends_on:
       - ABCJobs_db
+  
+  proyectos-microservice:
+    container_name: proyectos-microservice
+    build: ./proyectos
+    working_dir: /proyectos_microservice/
+    env_file: ./proyectos/.env
+    depends_on:
+      - ABCJobs_db
 
   ABCJobs_db:
     container_name: ABCJobs_db
@@ -37,3 +45,4 @@ services:
     depends_on:
       - auth-microservice
       - usuarios-microservice
+      - proyectos-microservice

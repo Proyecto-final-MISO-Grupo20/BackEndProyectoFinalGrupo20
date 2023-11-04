@@ -18,7 +18,7 @@ async def listar_tipos_empresa() -> ResponseDto:
             body= {'detail':'No existen tipos de Empresa.'}
         else:
             # Mapea los tipoEmpresa a un formato de respuesta si es necesario
-            tipoEmpresa_data = [{"id": tipoEmpresa.id, "tipoEmpresa": tipoEmpresa.tipoEmpresa} for tipoEmpresa in tipoEmpresa]
+            tipoEmpresa_data = tipoEmpresa_data = [{"id": tipoEmpresa.id, "tipo": tipoEmpresa.tipo} for tipoEmpresa in tipoEmpresa]
             body = tipoEmpresa_data
 
     except Exception as e:

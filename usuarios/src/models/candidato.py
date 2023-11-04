@@ -15,4 +15,14 @@ class Candidato(Model):
     
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
+    
+    @classmethod
+    async def findByUserId(cls, user_id):
+        candidatos = await cls.filter(usuarioId=user_id)
+        
+        if candidatos:
+            return candidatos[0]  # Devuelve el primer candidato de la lista
+        else:
+            return None  # No se encontraron candidatos
+
 
