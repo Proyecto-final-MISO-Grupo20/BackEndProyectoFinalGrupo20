@@ -37,3 +37,10 @@ spec:
             name: proyectos-microservice
             port:
               number: 80
+      - pathType: Prefix
+        path: /tech-skills
+        backend:
+          service:
+            name: tech-skills-microservice
+            port:
+              number: 80
