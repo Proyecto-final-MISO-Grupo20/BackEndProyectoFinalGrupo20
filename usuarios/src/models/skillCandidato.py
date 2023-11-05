@@ -8,7 +8,7 @@ class SkillCandidato(Model):
     id = IntField(pk=True)
     candidatoId = IntField()
     skillId = IntField()
-    nivel_nivel_dominio = IntField()
+    nivel_dominio = IntField()
 
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
