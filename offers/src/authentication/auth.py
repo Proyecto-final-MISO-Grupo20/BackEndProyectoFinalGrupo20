@@ -2,7 +2,6 @@ import requests
 
 from fastapi import HTTPException, Header, Request
 from http import HTTPStatus
-from functools import wraps
 
 from src.config import AUTH_SERVICE
 

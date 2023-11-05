@@ -44,3 +44,10 @@ spec:
             name: tech-skills-microservice
             port:
               number: 80
+      - pathType: Prefix
+        path: /offers
+        backend:
+          service:
+            name: offers-microservice
+            port:
+              number: 80

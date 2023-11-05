@@ -4,7 +4,4 @@ from .empresa import Empresa
 from .segmento import Segmento
 from .tipoEmpresa import TipoEmpresa
 from .ubicacion import Ubicacion
-from .habilidades import Habilidades
-from .habilidadesCandidato import HabilidadesCandidato
-from .herramientasCandidato import HerramientasCandidato
-from .herramientas import Herramientas
+from .skillCandidato import SkillCandidato
