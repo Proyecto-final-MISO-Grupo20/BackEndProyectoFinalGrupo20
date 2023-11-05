@@ -3,14 +3,12 @@ from tortoise.fields import IntField, CharField, BooleanField, DatetimeField
 from tortoise.exceptions import ValidationError, DoesNotExist
 
 
-class HerramientasCandidato(Model):
+class SkillCandidato(Model):
 
     id = IntField(pk=True)
     candidatoId = IntField()
-    herramientasId = IntField()
-    
+    skillId = IntField()
+    nivel_nivel_dominio = IntField()
+
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
-    
-
-
