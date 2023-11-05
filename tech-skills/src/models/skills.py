@@ -11,6 +11,9 @@ class Skills(Model):
     nombre = CharField(max_length=255)
     tipo = CharField(max_length=20)
 
+    class Meta:
+        unique_together = [("nombre", "tipo")]
+
     async def save(self, *args, **kwargs):
 
         if not TipoSkill.has_value(self.tipo):
