@@ -29,7 +29,9 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: appsecrets
-                key: tech-skills_uri
+                key: usuarios_uri
+          - name: AUTH_PATH
+            value: auth-microservice
         imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1
