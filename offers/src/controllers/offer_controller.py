@@ -12,8 +12,9 @@ def validate_health() -> str:
 
 
 @router.post('/{project_id}')
-async def crear_offer(request: Request, response: Response, project_id: int, user_id=Depends(get_token_header)
-                      ) -> Response:
+async def crear_offer(
+        request: Request, response: Response, project_id: int, user_id=Depends(get_token_header)
+) -> Response:
 
     data: GetOfferDto = await request.json()
 
