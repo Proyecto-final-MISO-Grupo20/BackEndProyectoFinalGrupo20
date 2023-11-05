@@ -6,9 +6,13 @@ from src.models import Skills
 from src.enums import TipoSkill
 
 
-async def listar_skills(tipo_skill):
+async def listar_skills(tipo_skill, user_id: int):
     body: str or dict = ''
     status_code: int = HTTPStatus.OK
+
+    if not user_id:
+        raise HTTPException(status_code=HTTPStatus.UNAUTHORIZED,
+                            detail='El usuario no tiene permisos para realizar esta acción')
 
     if not TipoSkill.has_value(tipo_skill):
         raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED,
@@ -23,18 +27,22 @@ async def listar_skills(tipo_skill):
     return ResponseDto(body, status_code)
 
 
-async def create_skill(data) -> ResponseDto:
+async def create_skill(data, user_id: int) -> ResponseDto:
     body: str or dict = ''
     status_code: HTTPStatus = HTTPStatus.CREATED
 
     validate_body(data)
 
     try:
-        skill = Skills(nombre=data.get('nombre'), tipo=data.get('tipo'))
+        if not user_id:
+            status_code = HTTPStatus.UNAUTHORIZED
+            body = {'detail': 'El usuario no tiene permisos para realizar esta acción'}
+        else:
+            skill = Skills(nombre=data.get('nombre'), tipo=data.get('tipo'))
 
-        await skill.save()
+            await skill.save()
 
-        body = CreateSkillResponseDto(skill.id, skill.nombre, skill.tipo)
+            body = CreateSkillResponseDto(skill.id, skill.nombre, skill.tipo)
 
     except Exception as exception:
         raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED,
