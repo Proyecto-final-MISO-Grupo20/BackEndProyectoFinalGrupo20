@@ -1,0 +1,4 @@
+[run]
+omit = /usr/lib/*
+relative_files = True
+branch = True
