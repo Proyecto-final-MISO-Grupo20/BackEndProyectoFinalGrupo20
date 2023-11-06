@@ -30,7 +30,7 @@ spec:
               secretKeyRef:
                 name: appsecrets
                 key: usuarios_uri
-          - name: USERS_PATH
+          - name: AUTH_PATH
             value: auth-microservice
         imagePullPolicy: Always
 ---
