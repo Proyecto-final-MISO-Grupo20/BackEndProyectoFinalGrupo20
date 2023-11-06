@@ -1,8 +1,8 @@
 from fastapi import HTTPException
 from http import HTTPStatus
 
-from src.dtos import CreateEmpleadoDto, ResponseDto
-from src.models import Empresa, Proyecto, Empleado
+from src.dtos import CreateEmpleadoDto, AsociateEmpleadoDto, ResponseDto
+from src.models import Empresa,  Empleado, Proyecto_Empleado
 
 
 async def create_empleado(data: CreateEmpleadoDto, user_id: int) -> ResponseDto:
@@ -34,6 +34,54 @@ async def create_empleado(data: CreateEmpleadoDto, user_id: int) -> ResponseDto:
             body = "Se agrego el empleado correctamente"
             
     except Exception as e:
+        raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+                            detail=e)
+
+    return ResponseDto(body, status_code)
+
+async def asociar_empleado_proyecto(data: AsociateEmpleadoDto) -> ResponseDto:
+    body: str or dict = ''
+    status_code: int = HTTPStatus.OK
+
+    data_keys = [key for key in data]
+    empleado_keys = AsociateEmpleadoDto.get_attributes(None)
+    
+    if not all(key in data_keys for key in empleado_keys):
+        raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
+                            detail='The request not contains all required data')
+    try:
+        # Se obtiene la empresa por medio del usuario
+        proyecto_empleado = await Proyecto_Empleado.findByProjectEmployed(data.get('proyectoId'), data.get('empleadoId'))
+        if proyecto_empleado:
+            status_code=HTTPStatus.BAD_REQUEST
+            body= {'detail':'El empleado ya esta asociado al proyecto'}
+        else:
+            proyecto_empleado = Proyecto_Empleado(proyectoId=data.get('proyectoId'), empleadoId=data.get('empleadoId'))
+            await proyecto_empleado.save()
+            body = "Se asocio el empleado correctamente"
+            
+    except Exception as e:
+        raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+                            detail=e)
+
+    return ResponseDto(body, status_code)
+
+async def list_empleados(user_id: int) -> ResponseDto:
+    body: str or dict = ''
+    status_code: int = HTTPStatus.OK
+
+    try:
+        # Se obtiene la empresa por medio del usuario
+        empresa = await Empresa.findByUserId(user_id)
+        
+        if not empresa:
+            status_code=HTTPStatus.BAD_REQUEST
+            body= {'detail':'El usuario no tiene el ROL para acceder a este recurso.'}
+        else:
+            body = await Empleado.findByEmpresaId(empresa.id)
+            
+    except Exception as e:
+        print(e)
         raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
                             detail=e)
 

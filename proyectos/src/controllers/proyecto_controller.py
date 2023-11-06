@@ -30,3 +30,19 @@ async def create_empleado(request: Request, response: Response, user_id=Depends(
     response.status_code = response_object.status_code
 
     return response_object.body
+
+@router.get('/list')
+async def listar_proyectos(response: Response, user_id=Depends(get_token_header)) -> Response:
+    response_object: ResponseDto = await proyecto_service.list_proyectos(user_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body
+
+@router.get('/empleados/list')
+async def listar_empleados(response: Response, user_id=Depends(get_token_header)) -> Response:
+    response_object: ResponseDto = await empleado_service.list_empleados(user_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body

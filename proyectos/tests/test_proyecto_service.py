@@ -36,3 +36,26 @@ async def test_create_proyecto():
     assert test_response.status_code == HTTPStatus.CREATED
 
     await close()
+
+@pytest.mark.asyncio
+async def test_listar_proyectos_con_usuario_mal():
+    await init()
+
+    # Se crea el proyecto con una empresa que no tiene usuario asociado tipo empresa
+    test_response = await proyecto_service.list_proyectos(2)
+    
+    assert test_response.status_code == HTTPStatus.BAD_REQUEST
+
+    await close()
+
+@pytest.mark.asyncio
+async def test_listar_proyectos():
+    await init()
+    await test_create_proyecto()
+    
+    # Se crea el proyecto con una empresa que no tiene usuario asociado tipo empresa
+    test_response = await proyecto_service.list_proyectos(1)
+    
+    assert test_response.status_code == HTTPStatus.OK
+
+    await close()

@@ -27,7 +27,6 @@ async def create_candidato(request: Request, response: Response) -> Response:
 
 @router.post('/empresa')
 async def create_candidato(request: Request, response: Response) -> Response:
-    print(request.json())
     empresa_data: CreateEmpresaDto = await request.json()
     response_object: ResponseDto = await usuario_service.create_empresa(empresa_data)
 
