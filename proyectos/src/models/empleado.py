@@ -16,5 +16,13 @@ class Empleado(Model):
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
     
-    
+    @classmethod
+    async def findByEmpresaId(cls, id):
+        empleados: list = []
+        empleados = await cls.filter(empresaId=id)
+        
+        if empleados:
+            return empleados 
+        else:
+            return None  # No se encontraron registros
 
