@@ -12,6 +12,14 @@ services:
     volumes:
       - ./ABCJobs/:/db/
 
+  usuarios-microservice:
+    container_name: usuarios-microservice
+    build: ./usuarios
+    working_dir: /usuarios_microservice/
+    env_file: ./usuarios/.env
+    depends_on:
+      - ABCJobs_db
+
   auth-microservice:
     container_name: auth-microservice
     build: ./auth
@@ -20,13 +28,6 @@ services:
     depends_on:
       - ABCJobs_db
 
-  usuarios-microservice:
-    container_name: usuarios-microservice
-    build: ./usuarios
-    working_dir: /usuarios_microservice/
-    env_file: ./usuarios/.env
-    depends_on:
-      - ABCJobs_db
   
   proyectos-microservice:
     container_name: proyectos-microservice
