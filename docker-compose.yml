@@ -43,8 +43,6 @@ services:
     env_file: ./tech-skills/.env
     depends_on:
       - ABCJobs_db
-    volumes:
-      - ./tech-skills/:/tech-skills_microservice/
 
   offers-microservice:
     container_name: offers-microservice
@@ -53,8 +51,6 @@ services:
     env_file: ./offers/.env
     depends_on:
       - ABCJobs_db
-    volumes:
-      - ./offers/:/offers_microservice/
 
   nginx:
     container_name: nginx
