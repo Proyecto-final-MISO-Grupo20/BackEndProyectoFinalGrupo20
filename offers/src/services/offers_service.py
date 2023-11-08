@@ -60,18 +60,8 @@ async def list_offers() -> ResponseDto:
     try:
         print('---------------------------------------')
         body = await Oferta.list("DISPONIBLE")   
-         # Si no se encontraron segmentos, puedes devolver una lista vacía o lanzar una excepción
-        # if not ofertas:
-        #     status_code=HTTPStatus.BAD_REQUEST
-        #     body= {'detail':'No existen ofertas.'}
-        # else:
-        #     # Mapea los segmentos a un formato de respuesta si es necesario
-        #     segmentos_data = [{"id": segmento.id, "segmento": segmento.segmento} for segmento in segmentos]
-        #     body = segmentos_data
-
 
     except Exception as e:
-        print(e)
         raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
                             detail=e)
 

@@ -103,16 +103,12 @@ async def postular_candidato(data: PostularCandidatoDto, user_id: int) -> Respon
                             detail='The request not contains all required data')
     try:
         candidato = await Candidato.findByUserId(user_id)
-        print('-------------------------------')
         postulacion = await Postulacion.getPostulacion(candidato.id, data.get('ofertaId'))
-        print('-------------------------------1')
         print(postulacion)
         if postulacion is None:
-            print('-------------------------------2')
             postulacion = await Postulacion(ofertaId=data.get('ofertaId'), candidatoId=candidato.id)
             await postulacion.save()
         else:
-            print('-------------------------------3')
             status_code=HTTPStatus.BAD_REQUEST
             body= {'detail':'El candidato ya esta asociado a esta oferta'}
 

@@ -171,3 +171,36 @@ async def test_create_empresa_con_username_repetido():
     assert exc_info.value.status_code == 400 
 
     await close()
+
+@pytest.mark.asyncio
+async def test_postular_candidato_faltan_campos():
+    await init()
+
+    with pytest.raises(HTTPException) as exc_info:
+        await usuario_service.postular_candidato({"oferta": 1}, 1)
+
+    # Verifica el código de estado HTTP de la excepción
+    assert exc_info.value.status_code == 400 
+
+    await close() 
+
+@pytest.mark.asyncio
+async def test_postular_candidato_ok():
+    await init()
+
+    test_response = await usuario_service.postular_candidato({"ofertaId": 1}, 1)
+
+    assert test_response.status_code == 200
+
+    await close() 
+
+@pytest.mark.asyncio
+async def test_postular_candidato_ya_existe():
+    await init()
+    await usuario_service.postular_candidato({"ofertaId": 2}, 1)
+    test_response = await usuario_service.postular_candidato({"ofertaId": 2}, 1)
+
+    # Verifica que se haya lanzado una excepción HTTPException con código 400 (Bad Request)
+    assert test_response.status_code == 400
+
+    await close() 
