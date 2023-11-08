@@ -23,7 +23,7 @@ async def test_crear_oferta():
             }
         ]
     }, 1, 1)
-
+ 
     assert test_response.status_code == HTTPStatus.CREATED
 
 
@@ -76,3 +76,8 @@ async def test_error_al_crear_oferta_con_datos_de_skills_incompletos():
     assert exception.status_code == HTTPStatus.PRECONDITION_FAILED
 
 
+@pytest.mark.asyncio
+async def test_list_offers():
+    test_response = await offers_service.list_offers()
+ 
+    assert test_response.status_code == HTTPStatus.OK

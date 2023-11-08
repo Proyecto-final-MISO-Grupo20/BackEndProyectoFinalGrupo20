@@ -25,3 +25,13 @@ async def crear_offer(
     response.status_code = response_object.status_code
 
     return response_object.body
+
+@router.get('')
+async def list_offer(response: Response, user_id=Depends(get_token_header)
+) -> Response:
+
+    response_object: ResponseDto = await offers_service.list_offers()
+
+    response.status_code = response_object.status_code
+
+    return response_object.body

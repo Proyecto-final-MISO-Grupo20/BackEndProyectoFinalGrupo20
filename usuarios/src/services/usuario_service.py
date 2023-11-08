@@ -1,8 +1,8 @@
 from fastapi import HTTPException
 from http import HTTPStatus
 
-from src.dtos import CreateCandidatoDto, ResponseDto, CreateCandidatoResponseDto, CreateEmpresaDto, CreateEmpresaResponseDto
-from src.models import Candidato, Usuario, Segmento, TipoEmpresa, Empresa, Ubicacion
+from src.dtos import CreateCandidatoDto, ResponseDto, CreateCandidatoResponseDto, CreateEmpresaDto, PostularCandidatoDto
+from src.models import Candidato, Usuario, Postulacion, Empresa, Ubicacion
 from werkzeug.security import generate_password_hash
 
 
@@ -43,7 +43,8 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
             body = CreateCandidatoResponseDto(usuario.username)
             
 
-    except Exception:
+    except Exception as e:
+        print(e)
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
                             detail='El username ya esta relacionado a un usuario.')
 
@@ -88,5 +89,32 @@ async def create_empresa(data: CreateEmpresaDto) -> ResponseDto:
     except Exception as e:
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
                             detail='El username ya esta relacionado a un usuario.')
+
+    return ResponseDto(body, status_code)
+
+async def postular_candidato(data: PostularCandidatoDto, user_id: int) -> ResponseDto:
+    body: str or dict = ''
+    status_code: HTTPStatus = HTTPStatus.OK
+
+    data_keys = [key for key in data]
+    postulacion_keys = PostularCandidatoDto.get_attributes(None)
+    if not all(key in data_keys for key in postulacion_keys):
+        raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
+                            detail='The request not contains all required data')
+    try:
+        candidato = await Candidato.findByUserId(user_id)
+        postulacion = await Postulacion.getPostulacion(candidato.id, data.get('ofertaId'))
+        print(postulacion)
+        if postulacion is None:
+            postulacion = await Postulacion(ofertaId=data.get('ofertaId'), candidatoId=candidato.id)
+            await postulacion.save()
+        else:
+            status_code=HTTPStatus.BAD_REQUEST
+            body= {'detail':'El candidato ya esta asociado a esta oferta'}
+
+    except Exception as exception:
+        print(exception)
+        raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED, 
+                            detail=f'{exception}')
 
     return ResponseDto(body, status_code)
