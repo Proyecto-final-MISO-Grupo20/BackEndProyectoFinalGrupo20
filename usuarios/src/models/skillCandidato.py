@@ -12,3 +12,12 @@ class SkillCandidato(Model):
 
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
+
+    @classmethod
+    async def list(cls, candidato_id: int):
+        skills_list: list = []
+
+        if candidato_id is not None:
+            skills_list = await cls.filter(candidatoId=candidato_id)
+
+        return skills_list

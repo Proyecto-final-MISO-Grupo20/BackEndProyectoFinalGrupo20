@@ -25,7 +25,7 @@ class Skills(Model):
     async def list(cls, tipo_skill: str):
         skills_list: list = []
 
-        if tipo_skill is None:
+        if tipo_skill is None or tipo_skill == '':
             skills_list = await cls.all()
 
         if tipo_skill is not None:

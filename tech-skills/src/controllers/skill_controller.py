@@ -25,6 +25,16 @@ async def crear_skill(request: Request, response: Response, user_id=Depends(get_
     return response_object.body
 
 
+@router.get('')
+async def listar_skills(response: Response, user_id=Depends(get_token_header)) -> Response:
+
+    response_object: ResponseDto = await skills_service.listar_skills(None, user_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body
+
+
 @router.get('/herramientas')
 async def listar_skills(response: Response, user_id=Depends(get_token_header)) -> Response:
 

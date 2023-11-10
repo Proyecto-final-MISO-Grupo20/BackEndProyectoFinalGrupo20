@@ -29,7 +29,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: appsecrets
-                key: usuarios_uri
+                key: db_app_uri
           - name: AUTH_PATH
             value: auth-microservice
         imagePullPolicy: Always
