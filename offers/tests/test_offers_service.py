@@ -81,3 +81,9 @@ async def test_list_offers():
     test_response = await offers_service.list_offers()
  
     assert test_response.status_code == HTTPStatus.OK
+
+@pytest.mark.asyncio
+async def test_list_offers_by_project():
+    test_response = await offers_service.list_offers_by_project(1)
+ 
+    assert test_response.status_code == HTTPStatus.OK

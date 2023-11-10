@@ -31,3 +31,12 @@ class Oferta(Model):
             ofertas = await cls.filter(estado=estado_oferta)
 
         return ofertas
+    
+    @classmethod
+    async def listByProject(cls, proyecto: int):
+        ofertas: list = []
+
+        
+        ofertas = await cls.filter(proyecto_id=proyecto)
+
+        return ofertas
