@@ -7,3 +7,6 @@ from .create_herramienta_dto import CreateHerramientaDto
 from .response_dto import ResponseDto
 from .exception_dto import ExceptionDto
 from .postular_candidato_dto import PostularCandidatoDto
+from .get_skills_response_dto import GetSkillsResponseDto
+from .skill_dto import SkillDto
+from .skills_data_response_dto import SkillsDataResponseDto
