@@ -5,6 +5,7 @@ from tortoise.exceptions import ValidationError, DoesNotExist
 
 class Postulacion(Model):
 
+    id = IntField(pk=True)
     candidatoId = IntField()
     ofertaId = IntField()
     

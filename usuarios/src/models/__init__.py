@@ -5,4 +5,3 @@ from .segmento import Segmento
 from .tipoEmpresa import TipoEmpresa
 from .ubicacion import Ubicacion
 from .skillCandidato import SkillCandidato
-from .postulacion import Postulacion

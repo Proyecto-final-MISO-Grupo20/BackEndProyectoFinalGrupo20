@@ -6,7 +6,7 @@ import src.services.skill_service as skill_service
 import src.services.tipoEmpresa_service as tipo_empresa_service
 from src.authentication import get_token_header
 
-from src.dtos import CreateCandidatoDto, ResponseDto, CreateEmpresaDto, AsociarSkillDto, PostularCandidatoDto
+from src.dtos import CreateCandidatoDto, ResponseDto, CreateEmpresaDto, AsociarSkillDto
 
 
 router: APIRouter = APIRouter(prefix='/usuario')
@@ -54,15 +54,6 @@ async def create_candidato(response: Response) -> Response:
 async def create_habilidad(request: Request, response: Response, user_id=Depends(get_token_header)) -> Response:
     skills_data: AsociarSkillDto = await request.json()
     response_object: ResponseDto = await skill_service.asociar_skill(skills_data, user_id)
-
-    response.status_code = response_object.status_code
-
-    return response_object.body
-
-@router.post('/postularCandidato')
-async def create_habilidad(request: Request, response: Response, user_id=Depends(get_token_header)) -> Response:
-    postulacion_data: PostularCandidatoDto = await request.json()
-    response_object: ResponseDto = await usuario_service.postular_candidato(postulacion_data, user_id)
 
     response.status_code = response_object.status_code
 
