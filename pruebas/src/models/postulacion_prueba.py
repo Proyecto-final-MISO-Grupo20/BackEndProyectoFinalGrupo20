@@ -13,3 +13,14 @@ class Postulacion_Prueba(Model):
     
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
+
+    @classmethod
+    async def get_by_postulacionId(cls, postulacion):
+        try:
+            pruebas = await cls.filter(postulacionId=postulacion)
+            if pruebas:
+                return pruebas
+            else:
+                return None
+        except DoesNotExist:
+            return None

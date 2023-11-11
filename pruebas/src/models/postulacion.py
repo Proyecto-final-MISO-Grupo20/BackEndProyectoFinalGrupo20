@@ -13,16 +13,21 @@ class Postulacion(Model):
         await super().save(*args, **kwargs)
     
     @classmethod
-    async def getPostulacion(cls, candidato, oferta):
+    async def get_by_candidato_and_oferta(cls, candidato, oferta):
         try:
-            print(candidato)
-            print(oferta)
-            postulacion = await cls.filter(candidatoId=candidato, ofertaId=oferta)
-            print(postulacion)
-            if postulacion:
-                return postulacion[0]
+            if candidato != ' ':
+                postulacion = await cls.filter(candidatoId=candidato, ofertaId=oferta)
+                print(postulacion)
+                if postulacion:
+                    return postulacion[0]
+                else:
+                    return None
             else:
-                return None
+                postulaciones = await cls.filter(ofertaId=oferta)
+                if postulaciones:
+                    return postulaciones
+                else:
+                    return None
         except DoesNotExist:
             return None
 

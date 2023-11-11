@@ -1,8 +1,7 @@
 from fastapi import HTTPException
 from http import HTTPStatus
-
-from src.dtos import ResponseDto, CreatePruebaDto, PostularCandidatoDto
-from src.models import Postulacion, Candidato, Prueba, Postulacion_Prueba
+from src.dtos import ResponseDto, CreatePruebaDto, PostularCandidatoDto, PruebaDto, PostulacionDto, GetPostulacionResponseDto
+from src.models import Postulacion, Candidato, Prueba, Postulacion_Prueba, Usuario
 
 
 async def registrar_prueba(data) -> ResponseDto:
@@ -38,7 +37,7 @@ async def postular_candidato(data: PostularCandidatoDto, user_id: int) -> Respon
 
     try:
         candidato = await Candidato.findByUserId(user_id)
-        postulacion = await Postulacion.getPostulacion(candidato.id, data.get('ofertaId'))
+        postulacion = await Postulacion.get_by_candidato_and_oferta(candidato.id, data.get('ofertaId'))
         if postulacion is None:
             postulacion = await Postulacion(ofertaId=data.get('ofertaId'), candidatoId=candidato.id)
             await postulacion.save()
@@ -51,6 +50,40 @@ async def postular_candidato(data: PostularCandidatoDto, user_id: int) -> Respon
                             detail=f'{exception}')
 
     return ResponseDto(body, status_code)
+
+async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
+    status_code: HTTPStatus = HTTPStatus.OK
+
+    try:
+        postulaciones = await Postulacion.get_by_candidato_and_oferta(' ', oferta_id)
+        postulaciones_response = []
+        print('---------------------------------------------------')
+        for i in range(len(postulaciones)):
+                postulacion = postulaciones[i]
+                print(postulacion)
+                candidato_id = postulacion.candidatoId
+                candidato = await Candidato.get(id=candidato_id)
+                print(candidato.id)
+                usuario = await Usuario.find_by_id(candidato.usuarioId)
+                print (usuario.id)
+                postResultados = await Postulacion_Prueba.get_by_postulacionId(postulacion.id)
+                pruebas_response = []
+                for j in range(len(postResultados)):
+                    postResultado = postResultados[j]
+                    print(postResultado.pruebaId)
+                    prueba = await Prueba.find_by_id(postResultado.pruebaId)
+                    print(prueba)
+                    pruebas_response.append(PruebaDto(prueba.nombre, prueba.tipo, postResultado.calificacion, postResultado.comentario))
+
+                postulaciones_response.append(PostulacionDto(usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
+
+        return GetPostulacionResponseDto(postulaciones_response, status_code)
+
+    except Exception as exception:
+        raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED, 
+                            detail=f'{exception}')
+
+    
 
 def validate_body(get_prueba_data):
     data_keys = [key for key in get_prueba_data]

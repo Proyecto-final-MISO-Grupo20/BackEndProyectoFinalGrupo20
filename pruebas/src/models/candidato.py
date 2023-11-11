@@ -1,7 +1,7 @@
 
 from tortoise.models import Model
 from tortoise.fields import IntField, CharField, BooleanField, DatetimeField
-from tortoise.exceptions import ValidationError
+from tortoise.exceptions import ValidationError, DoesNotExist
 
 
 class Candidato(Model):
@@ -24,5 +24,14 @@ class Candidato(Model):
             return candidatos[0]  # Devuelve el primer candidato de la lista
         else:
             return None  # No se encontraron candidatos
+        
+    @classmethod
+    async def get_by_id(cls, candidato_id):
+        try:
+            candidato = await Candidato.get(id=candidato_id)
+            return candidato
+        except DoesNotExist:
+            return None
+    
 
 

@@ -53,3 +53,13 @@ async def test_registrar_prueba_ok():
     assert test_response.status_code == 201
 
     await close() 
+
+@pytest.mark.asyncio
+async def test_consultar_postulaciones_oferta_ok():
+    await init()
+
+    test_response = await prueba_service.consultar_postulaciones_oferta(1)
+
+    assert test_response.status_code == 200
+
+    await close() 

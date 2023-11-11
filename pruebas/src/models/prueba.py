@@ -11,3 +11,7 @@ class Prueba(Model):
 
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
+    
+    @classmethod
+    def find_by_id(cls, prueba_id: int):
+        return cls.filter(id=prueba_id).first()
