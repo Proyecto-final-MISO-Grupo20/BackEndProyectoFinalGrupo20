@@ -14,7 +14,7 @@ async def listar_skills(tipo_skill, user_id: int):
         raise HTTPException(status_code=HTTPStatus.UNAUTHORIZED,
                             detail='El usuario no tiene permisos para realizar esta acción')
 
-    if not TipoSkill.has_value(tipo_skill):
+    if not TipoSkill.has_value(tipo_skill) and tipo_skill is not None:
         raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED,
                             detail='Invalid skill type, it must be HERRAMIENTA, HABILIDAD or IDIOMA')
 

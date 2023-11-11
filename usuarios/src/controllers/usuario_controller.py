@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Request, Response, Depends
-from typing import Union
 import src.services.usuario_service as usuario_service
 import src.services.segmento_service as segmento_service
 import src.services.skill_service as skill_service
@@ -50,10 +49,20 @@ async def create_candidato(response: Response) -> Response:
 
     return response_object.body
 
-@router.post('/asociarSkill')
-async def create_habilidad(request: Request, response: Response, user_id=Depends(get_token_header)) -> Response:
+
+@router.post('/skills')
+async def add_skill_to_candidate(request: Request, response: Response, user_id=Depends(get_token_header)) -> Response:
     skills_data: AsociarSkillDto = await request.json()
     response_object: ResponseDto = await skill_service.asociar_skill(skills_data, user_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body
+
+@router.get('/skills/{candidate_id}')
+async def skills_of_candidate(request: Request, response: Response, candidate_id, user_id=Depends(get_token_header)) -> Response:
+
+    response_object: ResponseDto = await skill_service.skills_of_candidate(request, candidate_id, user_id)
 
     response.status_code = response_object.status_code
 

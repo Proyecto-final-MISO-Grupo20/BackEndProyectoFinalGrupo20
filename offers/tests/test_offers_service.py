@@ -72,7 +72,6 @@ async def test_error_al_crear_oferta_con_datos_de_skills_incompletos():
         }, 1, 1)
 
     exception = exc_info.value
-    await close()
     assert exception.status_code == HTTPStatus.PRECONDITION_FAILED
 
 
