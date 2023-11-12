@@ -52,3 +52,10 @@ spec:
             name: offers-microservice
             port:
               number: 80
+      - pathType: Prefix
+        path: /pruebas
+        backend:
+          service:
+            name: pruebas-microservice
+            port:
+              number: 80

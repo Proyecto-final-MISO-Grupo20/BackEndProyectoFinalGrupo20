@@ -35,3 +35,13 @@ async def list_offer(response: Response, user_id=Depends(get_token_header)
     response.status_code = response_object.status_code
 
     return response_object.body
+
+@router.get('/{project_id}')
+async def list_offer_by_project(response: Response, project_id: int, user_id=Depends(get_token_header)
+) -> Response:
+
+    response_object: ResponseDto = await offers_service.list_offers_by_project(project_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body
