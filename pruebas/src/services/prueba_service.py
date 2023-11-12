@@ -57,25 +57,19 @@ async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
     try:
         postulaciones = await Postulacion.get_by_candidato_and_oferta(' ', oferta_id)
         postulaciones_response = []
-        print('---------------------------------------------------')
         for i in range(len(postulaciones)):
                 postulacion = postulaciones[i]
-                print(postulacion)
                 candidato_id = postulacion.candidatoId
                 candidato = await Candidato.get(id=candidato_id)
-                print(candidato.id)
                 usuario = await Usuario.find_by_id(candidato.usuarioId)
-                print (usuario.id)
                 postResultados = await Postulacion_Prueba.get_by_postulacionId(postulacion.id)
                 pruebas_response = []
                 for j in range(len(postResultados)):
                     postResultado = postResultados[j]
-                    print(postResultado.pruebaId)
                     prueba = await Prueba.find_by_id(postResultado.pruebaId)
-                    print(prueba)
                     pruebas_response.append(PruebaDto(prueba.nombre, prueba.tipo, postResultado.calificacion, postResultado.comentario))
 
-                postulaciones_response.append(PostulacionDto(usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
+                postulaciones_response.append(PostulacionDto(postulacion.id, usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
 
         return GetPostulacionResponseDto(postulaciones_response, status_code)
 
