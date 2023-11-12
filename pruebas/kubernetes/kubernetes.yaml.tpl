@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: offers
+  name: pruebas
   labels:
-    app: offers
+    app: pruebas
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: offers
+      app: pruebas
   template:
     metadata:
       labels:
-        app: offers
+        app: pruebas
     spec:
       containers:
-      - name: offers
-        image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/abc-jobs-repository/offers:COMMIT_SHA
+      - name: pruebas
+        image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/abc-jobs-repository/pruebas:COMMIT_SHA
         ports:
           - containerPort: 3000
         env:
@@ -37,24 +37,24 @@ spec:
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: offers-config
+  name: pruebas-config
 spec:
   healthCheck:
     checkIntervalSec: 30
     port: 3000
     type: HTTP
-    requestPath: /offers/ping
+    requestPath: /pruebas/ping
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: offers-microservice
+  name: pruebas-microservice
   annotations:
-    cloud.google.com/backend-config: '{"default": "offers-config"}'
+    cloud.google.com/backend-config: '{"default": "pruebas-config"}'
 spec:
   type: NodePort
   selector:
-    app: offers
+    app: pruebas
   ports:
     - protocol: TCP
       port: 80
