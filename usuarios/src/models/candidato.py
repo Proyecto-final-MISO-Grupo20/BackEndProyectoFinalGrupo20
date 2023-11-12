@@ -17,7 +17,7 @@ class Candidato(Model):
         await super().save(*args, **kwargs)
     
     @classmethod
-    async def findByUserId(cls, user_id):
+    async def find_by_user_id(cls, user_id):
         candidatos = await cls.filter(usuarioId=user_id)
         
         if candidatos:
