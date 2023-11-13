@@ -66,3 +66,17 @@ async def list_offers() -> ResponseDto:
                             detail=e)
 
     return ResponseDto(body, status_code)
+
+async def list_offers_by_project(project_id: int) -> ResponseDto:
+    body: str or dict = ''
+    status_code: int = HTTPStatus.OK
+
+    try:
+        print('---------------------------------------')
+        body = await Oferta.listByProject(project_id)  
+
+    except Exception as e:
+        raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+                            detail=e)
+
+    return ResponseDto(body, status_code)

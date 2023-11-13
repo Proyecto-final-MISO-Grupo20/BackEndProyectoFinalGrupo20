@@ -53,6 +53,14 @@ services:
     depends_on:
       - ABCJobs_db
 
+  pruebas-microservice:
+    container_name: pruebas-microservice
+    build: ./pruebas
+    working_dir: /pruebas_microservice/
+    env_file: ./pruebas/.env
+    depends_on:
+      - ABCJobs_db
+
   nginx:
     container_name: nginx
     ports:

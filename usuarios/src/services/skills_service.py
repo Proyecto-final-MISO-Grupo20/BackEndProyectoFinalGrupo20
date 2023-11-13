@@ -2,7 +2,7 @@ from fastapi import HTTPException, Request
 from http import HTTPStatus
 
 from src.dtos import ResponseDto, AsociarSkillDto, GetSkillsResponseDto, SkillsDataResponseDto
-from src.models import SkillCandidato, Candidato
+from src.models import SkillCandidato, Candidato, Empresa, Usuario
 from src.config import TECHSKILLS_SERVICE
 from src.services.utils_service import get_request, validate_response
 
@@ -17,7 +17,7 @@ async def asociar_skill(data: AsociarSkillDto, user_id: int) -> ResponseDto:
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
                             detail='The request not contains all required data')
     try:
-        candidato = await Candidato.findByUserId(user_id)
+        candidato = await Candidato.find_by_user_id(user_id)
         skill_candidato = SkillCandidato(
             skillId=data.get('skill'), candidatoId=candidato.id, nivel_dominio=data.get('nivel_dominio')
         )
@@ -34,18 +34,30 @@ async def skills_of_candidate(request: Request, candidate_id: int, user_id: int)
     body: str or dict = ''
     status_code: int = HTTPStatus.OK
 
-    if not user_id:
-        raise HTTPException(status_code=HTTPStatus.UNAUTHORIZED,
-                            detail='El usuario no tiene permisos para realizar esta acción')
+    await validate_user_type(user_id, 'business')
 
+    skills_response = await candidate_skills(candidate_id, request)
+
+    return ResponseDto(skills_response, status_code)
+
+
+async def skills_of_authenticated(request: Request, user_id: int):
+    body: str or dict = ''
+    status_code: int = HTTPStatus.OK
+
+    candidate = await validate_user_type(user_id, 'candidate')
+
+    skills_response = await candidate_skills(candidate.id, request)
+
+    return ResponseDto(skills_response, status_code)
+
+
+async def candidate_skills(candidate_id, request):
     skills_candidate = await SkillCandidato.list(candidate_id)
-
     if not skills_candidate:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
                             detail='There are no skills associated to the selected candidate')
-
     skills: GetSkillsResponseDto = await get_skills(request)
-
     skills_response = []
     for skill_candidate in skills_candidate:
         skill_id = skill_candidate.skillId
@@ -54,8 +66,7 @@ async def skills_of_candidate(request: Request, candidate_id: int, user_id: int)
         skills_response.append(SkillsDataResponseDto(
             skill_id, skill_candidate.nivel_dominio, skill_data
         ))
-
-    return ResponseDto(skills_response, status_code)
+    return skills_response
 
 
 async def get_skills(request: Request):
@@ -64,3 +75,19 @@ async def get_skills(request: Request):
     validate_response(response_skills.get('status_code'), response_skills.get('body'))
 
     return response_skills.get('body')
+
+
+async def validate_user_type(user_id, type):
+    if not user_id:
+        raise HTTPException(status_code=HTTPStatus.UNAUTHORIZED,
+                            detail='Se requiere autenticación para realizar esta acción')
+    user: Usuario = None
+    if type == 'business':
+        user = await Empresa.find_by_user_id(user_id)
+    elif type == 'candidate':
+        user = await Candidato.find_by_user_id(user_id)
+
+    if not user:
+        raise HTTPException(status_code=HTTPStatus.FORBIDDEN,
+                            detail='El usuario no tiene el ROL requerido para realizar esta acción')
+    return user
