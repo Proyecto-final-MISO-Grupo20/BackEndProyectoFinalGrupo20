@@ -7,6 +7,16 @@ from src.services import prueba_service
 
 
 @pytest.mark.asyncio
+async def test_consultar_postulaciones_oferta_sin_postulaciones():
+    await init()
+
+    test_response = await prueba_service.consultar_postulaciones_oferta(1)
+
+    assert test_response.status_code == 404
+
+    await close() 
+
+@pytest.mark.asyncio
 async def test_postular_candidato_faltan_campos():
     await init()
 
