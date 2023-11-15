@@ -37,4 +37,6 @@ async def consultar_postulaciones_oferta(response: Response, offer_id: int,  use
 
     response.status_code = response_object.status_code
 
+    if response.status_code != 200:
+        return response_object.body
     return response_object.postulaciones
