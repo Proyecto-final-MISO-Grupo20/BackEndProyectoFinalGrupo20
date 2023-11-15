@@ -13,3 +13,12 @@ class Empresa(Model):
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
 
+    @classmethod
+    async def find_by_user_id(cls, user_id):
+        empresa = await cls.filter(usuarioId=user_id)
+
+        if empresa:
+            return empresa[0]
+        else:
+            return None
+
