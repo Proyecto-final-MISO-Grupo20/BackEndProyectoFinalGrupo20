@@ -88,10 +88,7 @@ async def list_entrevistas_by_user(user_id: int) -> ResponseDto:
         try:
             #Lista todas las entrevistas de un usuario
             entrevistasUsuario = await EntrevistaUsuario.listByUser(user_id)
-            print("------------------------------------1")
             for entrevistaUsuario in entrevistasUsuario:
-                print("------------------------------------")
-                print(entrevistaUsuario.id)
                 entrevista = await Entrevista.get(id = entrevistaUsuario.entrevistaId) 
                 entrevistas.append(entrevista)
 
