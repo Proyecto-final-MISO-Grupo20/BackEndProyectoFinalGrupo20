@@ -61,6 +61,14 @@ services:
     depends_on:
       - ABCJobs_db
 
+  entrevistas-microservice:
+    container_name: entrevistas-microservice
+    build: ./entrevistas
+    working_dir: /entrevistas_microservice/
+    env_file: ./entrevistas/.env
+    depends_on:
+      - ABCJobs_db
+
   nginx:
     container_name: nginx
     ports:
@@ -74,3 +82,4 @@ services:
       - proyectos-microservice
       - tech-skills-microservice
       - offers-microservice
+      - entrevistas-microservice
