@@ -59,3 +59,10 @@ spec:
             name: pruebas-microservice
             port:
               number: 80
+      - pathType: Prefix
+        path: /entrevistas
+        backend:
+          service:
+            name: entrevistas-microservice
+            port:
+              number: 80
