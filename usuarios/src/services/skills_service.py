@@ -2,13 +2,12 @@ from fastapi import HTTPException, Request
 from http import HTTPStatus
 
 from src.dtos import ResponseDto, AsociarSkillDto, GetSkillsResponseDto, SkillsDataResponseDto
-from src.models import SkillCandidato, Candidato, Empresa, Usuario
+from src.models import SkillCandidato, Candidato
 from src.config import TECHSKILLS_SERVICE
-from src.services.utils_service import get_request, validate_response
+from src.services.utils_service import get_request, validate_response, validate_user_type
 
 
 async def asociar_skill(data: AsociarSkillDto, user_id: int) -> ResponseDto:
-    body: str or dict = ''
     status_code: HTTPStatus = HTTPStatus.OK
 
     data_keys = [key for key in data]
@@ -31,8 +30,7 @@ async def asociar_skill(data: AsociarSkillDto, user_id: int) -> ResponseDto:
 
 
 async def skills_of_candidate(request: Request, candidate_id: int, user_id: int):
-    body: str or dict = ''
-    status_code: int = HTTPStatus.OK
+    status_code = HTTPStatus.OK
 
     await validate_user_type(user_id, 'business')
 
@@ -42,8 +40,7 @@ async def skills_of_candidate(request: Request, candidate_id: int, user_id: int)
 
 
 async def skills_of_authenticated(request: Request, user_id: int):
-    body: str or dict = ''
-    status_code: int = HTTPStatus.OK
+    status_code = HTTPStatus.OK
 
     candidate = await validate_user_type(user_id, 'candidate')
 
@@ -54,9 +51,16 @@ async def skills_of_authenticated(request: Request, user_id: int):
 
 async def candidate_skills(candidate_id, request):
     skills_candidate = await SkillCandidato.list(candidate_id)
+    # If there are no skills associated with the candidate:
+    # - If the request is made to the endpoint usuarios/skills/{{candidate_id}}, raise an HTTP exception.
+    # - If the request is made to other endpoints, return an empty array.
     if not skills_candidate:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
-                            detail='There are no skills associated to the selected candidate')
+        if len(request.path_params) == 0:
+            return []
+        else:
+            raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
+                                detail='There are no skills associated with the selected candidate')
+
     skills: GetSkillsResponseDto = await get_skills(request)
     skills_response = []
     for skill_candidate in skills_candidate:
@@ -75,19 +79,3 @@ async def get_skills(request: Request):
     validate_response(response_skills.get('status_code'), response_skills.get('body'))
 
     return response_skills.get('body')
-
-
-async def validate_user_type(user_id, type):
-    if not user_id:
-        raise HTTPException(status_code=HTTPStatus.UNAUTHORIZED,
-                            detail='Se requiere autenticación para realizar esta acción')
-    user: Usuario = None
-    if type == 'business':
-        user = await Empresa.find_by_user_id(user_id)
-    elif type == 'candidate':
-        user = await Candidato.find_by_user_id(user_id)
-
-    if not user:
-        raise HTTPException(status_code=HTTPStatus.FORBIDDEN,
-                            detail='El usuario no tiene el ROL requerido para realizar esta acción')
-    return user

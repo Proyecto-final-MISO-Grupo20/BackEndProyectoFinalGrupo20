@@ -1,15 +1,12 @@
 import pytest
 import json
 from fastapi.testclient import TestClient
-from unittest.mock import patch, MagicMock
-from main import app 
+from main import app
 from unittest.mock import patch, AsyncMock
+
 # Crea un cliente de prueba para la aplicación FastAPI
 client = TestClient(app)
 
-# Importa el controlador y la función de servicio
-from src.controllers.usuario_controller import create_candidato  
-from src.services.usuario_service import create_candidato as real_create_candidato  
 
 @patch('src.controllers.usuario_controller.create_candidato', new_callable=AsyncMock)
 def test_create_candidato_controller(mock_create_candidato):
@@ -36,6 +33,7 @@ def test_create_candidato_controller(mock_create_candidato):
 
     # Verifica que la respuesta tenga un código de estado 400
     assert response.status_code == 201
+
 
 def test_ping():
     # Realiza una solicitud GET al endpoint /ping

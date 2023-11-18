@@ -9,3 +9,6 @@ from .exception_dto import ExceptionDto
 from .get_skills_response_dto import GetSkillsResponseDto
 from .skill_dto import SkillDto
 from .skills_data_response_dto import SkillsDataResponseDto
+from .get_candidates_dto import GetCandidatesDto
+from .get_candidates_list_dto import GetCandidatesListDto
+from .get_user_dto import GetUserDto
