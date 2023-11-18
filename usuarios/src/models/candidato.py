@@ -1,7 +1,5 @@
-
 from tortoise.models import Model
-from tortoise.fields import IntField, CharField, BooleanField, DatetimeField
-from tortoise.exceptions import ValidationError
+from tortoise.fields import IntField, CharField, DatetimeField
 
 
 class Candidato(Model):
@@ -21,8 +19,12 @@ class Candidato(Model):
         candidatos = await cls.filter(usuarioId=user_id)
         
         if candidatos:
-            return candidatos[0]  # Devuelve el primer candidato de la lista
+            return candidatos[0]
         else:
-            return None  # No se encontraron candidatos
+            return None
 
+    @classmethod
+    async def list(cls):
+        candidates_list = await cls.all()
 
+        return candidates_list
