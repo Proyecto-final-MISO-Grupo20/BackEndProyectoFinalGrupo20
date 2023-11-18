@@ -76,7 +76,7 @@ async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
                     prueba = await Prueba.find_by_id(postResultado.pruebaId)
                     pruebas_response.append(PruebaDto(prueba.nombre, prueba.tipo, postResultado.calificacion, postResultado.comentario))
 
-                postulaciones_response.append(PostulacionDto(postulacion.id, usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
+                postulaciones_response.append(PostulacionDto(candidato.id, usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
                 return GetPostulacionResponseDto(postulaciones_response, status_code)
             
        
