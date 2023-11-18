@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pruebas
+  name: entrevistas
   labels:
-    app: pruebas
+    app: entrevistas
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pruebas
+      app: entrevistas
   template:
     metadata:
       labels:
-        app: pruebas
+        app: entrevistas
     spec:
       containers:
-      - name: pruebas
-        image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/abc-jobs-repository/pruebas:COMMIT_SHA
+      - name: entrevistas
+        image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/abc-jobs-repository/entrevistas:COMMIT_SHA
         ports:
           - containerPort: 3000
         env:
@@ -29,7 +29,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: appsecrets
-                key: usuarios_uri
+                key: db_app_uri
           - name: AUTH_PATH
             value: auth-microservice
         imagePullPolicy: Always
@@ -37,26 +37,26 @@ spec:
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: pruebas-config
+  name: entrevistas-config
 spec:
   healthCheck:
     checkIntervalSec: 30
     port: 3000
     type: HTTP
-    requestPath: /pruebas/ping
+    requestPath: /entrevistas/ping
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: pruebas-microservice
+  name: entrevistas-microservice
   annotations:
-    cloud.google.com/backend-config: '{"default": "pruebas-config"}'
+    cloud.google.com/backend-config: '{"default": "entrevistas-config"}'
 spec:
   type: NodePort
   selector:
-    app: pruebas
+    app: entrevistas
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
-      nodePort: 31055
+      nodePort: 31075

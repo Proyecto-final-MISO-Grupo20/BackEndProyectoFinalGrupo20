@@ -1,4 +1,4 @@
-# [START cloudbuild]Build
+# [START cloudbuild]
 # This step builds the container image.
 steps:
 - name: 'gcr.io/cloud-builders/docker'
@@ -6,8 +6,8 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/abc-jobs-repository/pruebas:$SHORT_SHA'
-  - './pruebas'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/abc-jobs-repository/entrevistas:$SHORT_SHA'
+  - './entrevistas'
 
 # This step pushes the image to Artifact Registry
 # The PROJECT_ID and SHORT_SHA variables are automatically
@@ -16,7 +16,7 @@ steps:
   id: Push
   args:
   - 'push'
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/abc-jobs-repository/pruebas:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/abc-jobs-repository/entrevistas:$SHORT_SHA'
 # [END cloudbuild]
 
 # [START cloudbuild-trigger-cd]
@@ -29,7 +29,7 @@ steps:
   - |
     gcloud source repos clone abcjobs-cloudbuild-env && \
     cd abcjobs-cloudbuild-env && \
-    git checkout pruebas-candidate && \
+    git checkout entrevistas-candidate && \
     git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
 
 # This step generates the new manifest
@@ -39,7 +39,7 @@ steps:
   args:
   - '-c'
   - |
-     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" pruebas/kubernetes/kubernetes.yaml.tpl | \
+     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" entrevistas/kubernetes/kubernetes.yaml.tpl | \
      sed "s/COMMIT_SHA/${SHORT_SHA}/g" > abcjobs-cloudbuild-env/kubernetes.yaml
 
 # This step pushes the manifest back to abcjobs-cloudbuild-env
@@ -52,9 +52,9 @@ steps:
     set -x && \
     cd abcjobs-cloudbuild-env && \
     git add kubernetes.yaml && \
-    git commit -m "Deploying image us-central1-docker.pkg.dev/$PROJECT_ID/abc-jobs-repository/pruebas:${SHORT_SHA}
+    git commit -m "Deploying image us-central1-docker.pkg.dev/$PROJECT_ID/abc-jobs-repository/entrevistas:${SHORT_SHA}
     Built from commit ${COMMIT_SHA} of repository abc-jobs-repository
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
-    git push origin pruebas-candidate
+    git push origin entrevistas-candidate
 
 # [END cloudbuild-trigger-cd]
