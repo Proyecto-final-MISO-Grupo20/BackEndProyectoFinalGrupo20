@@ -1,13 +1,15 @@
+from datetime import timedelta
+
 import unittest
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from werkzeug.security import generate_password_hash
 
 from controllers.auth_controller import auth
-from helpers.extensions import setup_jwt
 from models import Usuario
 from database import db
+
+AUTH_LOGIN = "/auth/login"
 
 
 class TestApp(unittest.TestCase):
@@ -17,7 +19,8 @@ class TestApp(unittest.TestCase):
         self.app.config['TESTING'] = True
         self.app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///:memory'
         self.jwt = JWTManager(self.app)
-        setup_jwt(self.app)
+        self.app.config["JWT_SECRET_KEY"] = 'MySecretKey'
+        self.app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
         db.init_app(self.app)
 
         self.app.register_blueprint(auth)
@@ -47,28 +50,28 @@ class TestApp(unittest.TestCase):
             db.drop_all()
 
     def test_login_success(self):
-        response = self.client.post("/auth/login", json={"username": "test_user", "password": "test_password"})
+        response = self.client.post("%s" % AUTH_LOGIN, json={"username": "test_user", "password": "test_password"})
         data = response.get_json()
 
         self.assertEqual(response.status_code, 200)
         self.assertIn("token", data)
 
     def test_login_invalid_credentials(self):
-        response = self.client.post('/auth/login', json={'username': 'test_user', 'password': 'wrong_password'})
+        response = self.client.post("%s" % AUTH_LOGIN, json={'username': 'test_user', 'password': 'wrong_password'})
         data = response.get_json()
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(data['error'], 'Email or password are incorrect')
 
     def test_login_without_all_fields(self):
-        response = self.client.post("/auth/login", json={"username": "test_user"})
+        response = self.client.post("%s" % AUTH_LOGIN, json={"username": "test_user"})
         data = response.get_json()
 
         self.assertEqual(response.status_code, 400)
         self.assertIn("error", data)
 
     def test_whoami_authenticated(self):
-        login_response = self.client.post("/auth/login", json={"username": "test_user", "password": "test_password"})
+        login_response = self.client.post("%s" % AUTH_LOGIN, json={"username": "test_user", "password": "test_password"})
         token = login_response.get_json()['token']
         headers = {"Authorization": f"Bearer {token}"}
 
