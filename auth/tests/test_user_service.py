@@ -5,6 +5,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from werkzeug.security import generate_password_hash
 
+from config import JWT_SECRET_KEY
 from controllers.auth_controller import auth
 from models import Usuario
 from database import db
