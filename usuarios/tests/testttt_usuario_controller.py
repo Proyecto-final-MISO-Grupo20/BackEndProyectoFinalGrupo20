@@ -8,7 +8,7 @@ from unittest.mock import patch, AsyncMock
 client = TestClient(app)
 
 
-@patch('src.controllers.usuario_controller.create_candidato', new_callable=AsyncMock)
+@patch('src.controllers.usuario_controller.create_candidate', new_callable=AsyncMock)
 def test_create_candidato_controller(mock_create_candidato):
     # Configura el mock para que devuelva una respuesta simulada
     mock_create_candidato.return_value.status_code = 201
