@@ -10,6 +10,8 @@ from controllers.auth_controller import auth
 from models import Usuario
 from database import db
 
+AUTH_LOGIN = "/auth/login"
+
 
 class TestApp(unittest.TestCase):
 
@@ -49,28 +51,28 @@ class TestApp(unittest.TestCase):
             db.drop_all()
 
     def test_login_success(self):
-        response = self.client.post("/auth/login", json={"username": "test_user", "password": "test_password"})
+        response = self.client.post("%s" % AUTH_LOGIN, json={"username": "test_user", "password": "test_password"})
         data = response.get_json()
 
         self.assertEqual(response.status_code, 200)
         self.assertIn("token", data)
 
     def test_login_invalid_credentials(self):
-        response = self.client.post('/auth/login', json={'username': 'test_user', 'password': 'wrong_password'})
+        response = self.client.post("%s" % AUTH_LOGIN, json={'username': 'test_user', 'password': 'wrong_password'})
         data = response.get_json()
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(data['error'], 'Email or password are incorrect')
 
     def test_login_without_all_fields(self):
-        response = self.client.post("/auth/login", json={"username": "test_user"})
+        response = self.client.post("%s" % AUTH_LOGIN, json={"username": "test_user"})
         data = response.get_json()
 
         self.assertEqual(response.status_code, 400)
         self.assertIn("error", data)
 
     def test_whoami_authenticated(self):
-        login_response = self.client.post("/auth/login", json={"username": "test_user", "password": "test_password"})
+        login_response = self.client.post("%s" % AUTH_LOGIN, json={"username": "test_user", "password": "test_password"})
         token = login_response.get_json()['token']
         headers = {"Authorization": f"Bearer {token}"}
 
