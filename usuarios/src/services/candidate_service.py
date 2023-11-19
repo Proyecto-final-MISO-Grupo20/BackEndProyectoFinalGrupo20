@@ -45,11 +45,8 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
 
             body = CreateCandidatoResponseDto(usuario.username)
 
-
     except Exception as e:
-        print(e)
-        raise HTTPException(status_code=HTTPStatus.BAD_REQUEST,
-                            detail='El username ya esta relacionado a un usuario.')
+        raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR, detail=str(e))
 
     return ResponseDto(body, status_code)
 
