@@ -1,7 +1,7 @@
 import pytest
 from httpx import request
 
-from .db_tests import init, close
+from .db_tests import init, close, delete_test_database
 from http import HTTPStatus
 from src.services import candidate_service
 from src.services import business_service
@@ -9,7 +9,7 @@ from fastapi.exceptions import HTTPException
 
 
 @pytest.mark.asyncio
-async def test_create_usuario():
+async def test_create_candidate():
     await init()
 
     test_response = await candidate_service.create_candidato({
@@ -30,7 +30,7 @@ async def test_create_usuario():
     await close()
 
 @pytest.mark.asyncio
-async def test_create_usuario_faltan_campos():
+async def test_create_candidate_with_missing_fields():
     await init()
 
     with pytest.raises(HTTPException) as exc_info:
@@ -49,10 +49,35 @@ async def test_create_usuario_faltan_campos():
     # Verifica el código de estado HTTP de la excepción
     assert exc_info.value.status_code == 400   
 
-    await close() 
+    await close()
+
 
 @pytest.mark.asyncio
-async def test_create_usuario_con_username_repetido():
+async def test_create_candidate_with_bad_username():
+    await init()
+
+    with pytest.raises(HTTPException) as exc_info:
+        await candidate_service.create_candidato({
+            "nombre": "John Doe",
+            "tipo_documento": 1,
+            "documento": 45678,
+            "username": "maxlengthofcolumnreacheditslimitof25characters",
+            "password": "password",
+            "email": "johndoe@ejemplo.com",
+            "fecha_nacimiento": 20230601,
+            "telefono": 123456,
+            "pais": "USA",
+            "ciudad": "Miami"
+        })
+
+    # Verifica el código de estado HTTP de la excepción
+    assert exc_info.value.status_code == 500
+
+    await close()
+
+
+@pytest.mark.asyncio
+async def test_create_candidate_duplicated_username():
     await init()
 
     # Primera llamada para crear un usuario
@@ -172,13 +197,14 @@ async def test_create_empresa_con_username_repetido():
     await close()
 
 
-async def test_there_arent_candidates():
+@pytest.mark.asyncio
+async def test_get_candidates_with_unauthorized_user():
     await init()
 
     with pytest.raises(HTTPException) as exc_info:
         await candidate_service.get_candidates(request, "1")
 
     # Verifica el código de estado HTTP de la excepción
-    assert exc_info.value.status_code == 400
+    assert exc_info.value.status_code == 403
 
-    await close()
+    await delete_test_database()

@@ -1,3 +1,5 @@
+import os
+
 from tortoise import Tortoise
 
 
@@ -11,3 +13,8 @@ async def init():
 
 async def close():
     await Tortoise.close_connections()
+
+
+async def delete_test_database():
+    await Tortoise.close_connections()
+    os.remove("test_db.sqlite")
