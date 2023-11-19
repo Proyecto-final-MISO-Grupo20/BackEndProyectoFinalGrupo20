@@ -14,11 +14,10 @@ def login():
     data = request.json
     data_keys = [key for key in data]
     login_keys = LoginDto.get_attributes(None)
-    print('entro aca 0.')
+
     if not all(key in data_keys for key in login_keys):
-        print('entro aca 1.')
         return jsonify({'error': 'La petición no contiene todos los campos requeridos.'}), 400
-    print('entro aca 2.')
+
     user = Usuario.find_by_username(data['username'])
     
     if user and check_password_hash(user.password, data['password']):

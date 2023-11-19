@@ -5,6 +5,7 @@
 
 *__pycache__
 *.sqlite*
+:memory
 
 #VSC Settings
 .vscode
