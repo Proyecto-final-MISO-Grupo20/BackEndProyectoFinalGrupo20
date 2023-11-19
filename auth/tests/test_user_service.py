@@ -1,11 +1,12 @@
+from datetime import timedelta
+
 import unittest
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from werkzeug.security import generate_password_hash
 
+from config import JWT_SECRET_KEY
 from controllers.auth_controller import auth
-from helpers.extensions import setup_jwt
 from models import Usuario
 from database import db
 
@@ -17,7 +18,8 @@ class TestApp(unittest.TestCase):
         self.app.config['TESTING'] = True
         self.app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///:memory'
         self.jwt = JWTManager(self.app)
-        setup_jwt(self.app)
+        self.app.config["JWT_SECRET_KEY"] = 'MySecretKey'
+        self.app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
         db.init_app(self.app)
 
         self.app.register_blueprint(auth)
