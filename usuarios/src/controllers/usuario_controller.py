@@ -1,7 +1,5 @@
 from fastapi import APIRouter, Request, Response, Depends
-import src.services.business_service as business_service
-import src.services.candidate_service as candidate_service
-import src.services.skills_service as skills_service
+from src.services import user_service, skills_service, candidate_service, business_service
 from src.authentication import get_token_header
 
 from src.dtos import CreateCandidatoDto, ResponseDto, CreateEmpresaDto, AsociarSkillDto
@@ -12,6 +10,14 @@ router: APIRouter = APIRouter(prefix='/usuario')
 @router.get('/ping')
 def validate_health() -> str:
     return 'pong'
+
+
+@router.get('/{user_id}')
+async def get_user(response: Response, user_id: int, logged_user_id=Depends(get_token_header)) -> Response:
+    response_object: ResponseDto = await user_service.get_user(user_id, logged_user_id)
+    response.status_code = response_object.status_code
+
+    return response_object.body
 
 
 @router.post('/candidato')
