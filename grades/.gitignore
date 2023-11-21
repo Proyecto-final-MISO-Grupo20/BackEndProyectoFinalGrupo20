@@ -1,0 +1,14 @@
+.coverage
+*.coverage
+.pytest_cache
+*.pytest_cache
+
+*__pycache__
+*.sqlite*
+
+#VSC Settings
+.vscode
+.idea/*
+
+.env
+secrets.yaml
