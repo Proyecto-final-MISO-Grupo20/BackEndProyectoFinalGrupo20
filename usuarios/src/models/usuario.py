@@ -31,7 +31,7 @@ class Usuario(Model):
     async def get_by_id(cls, user_id):
         try:
             user = await cls.get(id=user_id)
-            user_data = GetUserDto(user.id, user.nombre, user.tipo_documento, user.documento, user.email)
+            user_data = GetUserDto(user.id, user.nombre, user.tipo_documento, user.documento, user.email, user.rol)
             return user_data
         except DoesNotExist:
             return None

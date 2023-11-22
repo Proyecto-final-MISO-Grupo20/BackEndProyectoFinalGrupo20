@@ -10,6 +10,7 @@
 #VSC Settings
 .vscode
 .idea/*
+*/.idea/*
 
 .env
 secrets.yaml

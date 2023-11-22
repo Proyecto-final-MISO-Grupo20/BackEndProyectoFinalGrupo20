@@ -8,5 +8,4 @@ class GetUserDto:
     tipo_documento: int
     documento: str
     email: str
-
-    
+    rol: int
