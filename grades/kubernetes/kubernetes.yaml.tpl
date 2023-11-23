@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tech-skills
+  name: grades
   labels:
-    app: tech-skills
+    app: grades
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tech-skills
+      app: grades
   template:
     metadata:
       labels:
-        app: tech-skills
+        app: grades
     spec:
       containers:
-      - name: tech-skills
-        image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/abc-jobs-repository/tech-skills:COMMIT_SHA
+      - name: grades
+        image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/abc-jobs-repository/grades:COMMIT_SHA
         ports:
           - containerPort: 3000
         env:
@@ -32,31 +32,33 @@ spec:
                 key: db_app_uri
           - name: AUTH_PATH
             value: auth-microservice
+          - name: USERS_PATH
+            value: usuarios-microservice
         imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: tech-skills-config
+  name: grades-config
 spec:
   healthCheck:
     checkIntervalSec: 30
     port: 3000
     type: HTTP
-    requestPath: /tech-skills/ping
+    requestPath: /grades/ping
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: tech-skills-microservice
+  name: grades-microservice
   annotations:
-    cloud.google.com/backend-config: '{"default": "tech-skills-config"}'
+    cloud.google.com/backend-config: '{"default": "grades-config"}'
 spec:
   type: NodePort
   selector:
-    app: tech-skills
+    app: grades
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
-      nodePort: 31035
+      nodePort: 31085
