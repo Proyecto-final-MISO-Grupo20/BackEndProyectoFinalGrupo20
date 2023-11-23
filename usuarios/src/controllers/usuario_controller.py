@@ -12,7 +12,7 @@ def validate_health() -> str:
     return 'pong'
 
 
-@router.get('/{user_id}')
+@router.get('/usuarios/{user_id}')
 async def get_user(response: Response, user_id: int, logged_user_id=Depends(get_token_header)) -> Response:
     response_object: ResponseDto = await user_service.get_user(user_id, logged_user_id)
     response.status_code = response_object.status_code
