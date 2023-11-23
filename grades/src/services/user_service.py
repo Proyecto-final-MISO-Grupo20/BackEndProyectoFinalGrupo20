@@ -22,7 +22,7 @@ async def validate_user_type(request: Request, user_id, user_type):
 
 async def get_user(request: Request, user_id):
 
-    get_user_response = await get_request(f'{USERS_SERVICE}/usuario/{user_id}', request)
+    get_user_response = await get_request(f'{USERS_SERVICE}/usuario/usuarios/{user_id}', request)
     user: GetUserDto = get_user_response.get('body')
     validate_response(get_user_response.get('status_code'), user)
 

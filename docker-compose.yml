@@ -75,8 +75,6 @@ services:
     env_file: ./grades/.env
     depends_on:
       - ABCJobs_db
-    volumes:
-      - ./grades/:/grades_microservice/
 
   nginx:
     container_name: nginx
