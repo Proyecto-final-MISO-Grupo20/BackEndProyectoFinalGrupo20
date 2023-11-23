@@ -1,0 +1,73 @@
+name: "Automerge microservice Grades"
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature-**'
+    paths:
+      - 'grades/**'
+  workflow_dispatch:
+
+jobs:
+  unit-test:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    outputs:
+      test-coverage: ${{ steps.test-coverage.outputs.success }}
+    steps:
+      - uses: actions/checkout@main
+      - name: Configuración de entorno de python
+        uses: actions/setup-python@main
+        with:
+            python-version: '3.9'
+      - name: Install environment
+        working-directory: ./grades
+        run: |
+          pip install pipenv
+          pipenv sync --system --dev
+          pip install -r requirements.txt
+          export VIRTUAL_ENV="$(pipenv --venv)" PATH="$(pipenv --venv)/bin:$PATH"
+      - name: Run unit tests
+        id: correr-pruebas
+        working-directory: ./grades
+        run: |
+          coverage run -m pytest -s tests
+          coverage report -m --fail-under=80
+          coverage xml -o coverage.xml
+      - name: Validar resultado de coverage
+        id: test-coverage
+        if: ${{ success() }}
+        run: echo "success=true" >> $GITHUB_OUTPUT
+      - name: Upload coverage report
+        uses: actions/upload-artifact@main
+        with:
+          name: coverage-report
+          path: grades/coverage.xml
+
+  sonarcloud:
+    uses: ./.github/workflows/sonarcloud.yml
+    needs: unit-test
+    with:
+      service: "grades"
+    secrets:
+      sonar_token: ${{ secrets.SONAR_TOKEN }}
+
+  update-feature-branch:
+    uses: ./.github/workflows/update-feature-branch.yml
+    needs: sonarcloud
+
+  merge:
+    needs: update-feature-branch
+    name: Merge de feature en develop
+    runs-on: ubuntu-latest
+    if: ${{ needs.unit-test.outputs.test-coverage }}
+    steps:
+      - name: Mezcla feature -> develop
+        uses: tukasz/direct-merge-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: ${{ github.ref }}
+          target-branch: develop
+          commit-message: Automatic merge of ${{ github.ref }} -> develop

@@ -23,7 +23,11 @@ class Proyecto(Model):
             return proyectos 
         else:
             return None  # No se encontraron registros
-    
-    
-    
 
+    @classmethod
+    async def find_by_id(cls, project_id):
+        try:
+            project = await cls.get(id=project_id)
+            return project
+        except DoesNotExist:
+            return None
