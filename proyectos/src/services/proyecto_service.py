@@ -60,3 +60,21 @@ async def list_proyectos(user_id: int) -> ResponseDto:
 
     return ResponseDto(body, status_code)
 
+
+async def get_project(project_id: int, user_id: int) -> ResponseDto:
+    status_code = HTTPStatus.OK
+
+    try:
+        empresa = await Empresa.findByUserId(user_id)
+
+        if not empresa:
+            status_code = HTTPStatus.BAD_REQUEST
+            body = {'detail': 'El usuario no tiene el ROL para crear un Proyecto.'}
+        else:
+            body = await Proyecto.find_by_id(project_id)
+
+    except Exception as exception:
+        raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED,
+                            detail=f'{exception}')
+
+    return ResponseDto(body, status_code)
