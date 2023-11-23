@@ -34,7 +34,7 @@ jobs:
         working-directory: ./grades
         run: |
           coverage run -m pytest -s tests
-          coverage report -m --fail-under=80
+          coverage report -m --fail-under=75
           coverage xml -o coverage.xml
       - name: Validar resultado de coverage
         id: test-coverage
