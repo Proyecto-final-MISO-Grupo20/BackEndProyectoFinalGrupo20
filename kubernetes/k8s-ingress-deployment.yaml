@@ -66,3 +66,10 @@ spec:
             name: entrevistas-microservice
             port:
               number: 80
+      - pathType: Prefix
+        path: /grades
+        backend:
+          service:
+            name: grades-microservice
+            port:
+              number: 80
