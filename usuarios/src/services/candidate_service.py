@@ -52,8 +52,7 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
 
 
 async def get_candidates(request: Request, user_id: str):
-    await validate_user_type(user_id, 'business')
-
+    usuario = await validate_user_type(user_id, 'business')
     candidates_list = await Candidato.list()
 
     if not candidates_list:

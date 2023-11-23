@@ -19,14 +19,14 @@ def get_token_header(request: Request):
     return {'Authorization': request.headers.get('Authorization')}
 
 
-async def validate_user_type(user_id, type):
+async def validate_user_type(user_id, user_type):
     if not user_id:
         raise HTTPException(status_code=HTTPStatus.UNAUTHORIZED,
                             detail='Se requiere autenticación para realizar esta acción')
     user = None
-    if type == 'business':
+    if user_type == 'business':
         user = await Empresa.find_by_user_id(user_id)
-    elif type == 'candidate':
+    elif user_type == 'candidate':
         user = await Candidato.find_by_user_id(user_id)
 
     if user is None:

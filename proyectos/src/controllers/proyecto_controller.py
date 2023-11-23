@@ -31,13 +31,24 @@ async def create_empleado(request: Request, response: Response, user_id=Depends(
 
     return response_object.body
 
-@router.get('/list')
+
+@router.get('')
 async def listar_proyectos(response: Response, user_id=Depends(get_token_header)) -> Response:
     response_object: ResponseDto = await proyecto_service.list_proyectos(user_id)
 
     response.status_code = response_object.status_code
 
     return response_object.body
+
+
+@router.get('/{project_id}')
+async def get_project(response: Response, project_id, user_id=Depends(get_token_header)) -> Response:
+    response_object: ResponseDto = await proyecto_service.get_project(project_id, user_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body
+
 
 @router.get('/empleados/list')
 async def listar_empleados(response: Response, user_id=Depends(get_token_header)) -> Response:
