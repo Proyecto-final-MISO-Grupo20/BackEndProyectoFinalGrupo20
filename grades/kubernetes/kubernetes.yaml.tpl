@@ -34,6 +34,8 @@ spec:
             value: auth-microservice
           - name: USERS_PATH
             value: usuarios-microservice
+          - name: PROJECTS_PATH
+            value: proyectos-microservice
         imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1
