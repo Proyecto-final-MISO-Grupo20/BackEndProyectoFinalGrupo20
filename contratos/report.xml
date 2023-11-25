@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="1.704" timestamp="2023-11-22T18:42:41.713693" hostname="DESKTOP-1E6RNVP"><testcase classname="tests.test_contratos_service" name="test_registrar_contrato_ok" time="0.187" /></testsuite></testsuites>
