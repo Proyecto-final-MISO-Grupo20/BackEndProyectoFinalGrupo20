@@ -1,7 +1,7 @@
 import pytest
 from fastapi.exceptions import HTTPException
 
-from .db_tests import init, close
+from .db_tests import init, delete_test_database
 from http import HTTPStatus
 from src.services import utils_service
 
@@ -19,4 +19,4 @@ async def test_validate_body_grades():
 
     assert exc_info.value.status_code == HTTPStatus.BAD_REQUEST
 
-    await close()
+    await delete_test_database()
