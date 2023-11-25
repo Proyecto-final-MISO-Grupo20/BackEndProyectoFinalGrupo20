@@ -1,4 +1,4 @@
-name: "Automerge microservice Grades"
+name: "Automerge microservice Contratos"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - develop
       - 'feature-**'
     paths:
-      - 'grades/**'
+      - 'contratos/**'
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         with:
             python-version: '3.9'
       - name: Install environment
-        working-directory: ./grades
+        working-directory: ./contratos
         run: |
           pip install pipenv
           pipenv sync --system --dev
@@ -31,7 +31,7 @@ jobs:
           export VIRTUAL_ENV="$(pipenv --venv)" PATH="$(pipenv --venv)/bin:$PATH"
       - name: Run unit tests
         id: correr-pruebas
-        working-directory: ./grades
+        working-directory: ./contratos
         run: |
           coverage run -m pytest -s tests
           coverage report -m --fail-under=75
@@ -44,13 +44,13 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: coverage-report
-          path: grades/coverage.xml
+          path: contratos/coverage.xml
 
   sonarcloud:
     uses: ./.github/workflows/sonarcloud.yml
     needs: unit-test
     with:
-      service: "grades"
+      service: "contratos"
     secrets:
       sonar_token: ${{ secrets.SONAR_TOKEN }}
 
