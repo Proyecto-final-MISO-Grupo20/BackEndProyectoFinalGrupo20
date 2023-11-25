@@ -99,3 +99,4 @@ services:
       - offers-microservice
       - entrevistas-microservice
       - grades-microservice
+      - contratos-microservice
