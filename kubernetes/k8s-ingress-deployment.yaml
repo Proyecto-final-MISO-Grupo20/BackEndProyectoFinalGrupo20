@@ -73,3 +73,10 @@ spec:
             name: grades-microservice
             port:
               number: 80
+      - pathType: Prefix
+        path: /contratos
+        backend:
+          service:
+            name: contratos-microservice
+            port:
+              number: 80
