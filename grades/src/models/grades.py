@@ -15,3 +15,12 @@ class Grades(Model):
 
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
+
+    @classmethod
+    async def find_by_candidate_id(cls, candidate_id):
+        candidate_grades: list = []
+
+        if candidate_id is not None:
+            candidate_grades = await cls.filter(candidate_id=candidate_id)
+
+        return candidate_grades
