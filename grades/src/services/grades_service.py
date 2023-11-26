@@ -33,8 +33,8 @@ async def create_grades(request: Request, candidate_id: int, project_id: int, us
 
 
 async def get_candidate_grades(request: Request, candidate_id: int, user_id: int) -> ResponseDto:
-    await validate_user_type(request, user_id, 'business')
-    await validate_user_type(request, candidate_id, 'candidate')
+    # await validate_user_type(request, user_id, 'business')
+    # await validate_user_type(request, candidate_id, 'candidate')
 
     grades_response = await get_grades(request, candidate_id)
 
