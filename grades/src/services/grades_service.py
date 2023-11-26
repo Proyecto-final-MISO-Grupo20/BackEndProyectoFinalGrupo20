@@ -50,21 +50,14 @@ async def get_authenticated_candidate_grades(request: Request, candidate_id: int
 
 
 async def get_grades(request: Request, candidate_id: int):
-    try:
-        candidate_grades = await Grades.find_by_candidate_id(candidate_id)
 
-        if not candidate_grades:
-            raise HTTPException(status_code=HTTPStatus.NOT_FOUND,
-                                detail='The candidate with the given ID does not have any project grades')
+    candidate_grades = await Grades.find_by_candidate_id(candidate_id)
 
-        grades_response = []
-        for candidate_grade in candidate_grades:
-            project = await get_project(request, candidate_grade.project_id)
-            grades_response.append(GetGradesResponseDto(
-                candidate_grade.id, candidate_grade.grade, candidate_grade.comment, project
-            ))
-
-    except Exception as exception:
-        raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED, detail=f'{exception}')
+    grades_response = []
+    for candidate_grade in candidate_grades:
+        project = await get_project(request, candidate_grade.project_id)
+        grades_response.append(GetGradesResponseDto(
+            candidate_grade.id, candidate_grade.grade, candidate_grade.comment, project
+        ))
 
     return grades_response
