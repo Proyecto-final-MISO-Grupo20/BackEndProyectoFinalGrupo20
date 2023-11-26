@@ -34,6 +34,8 @@ spec:
             value: auth-microservice
           - name: TECHSKILLS_PATH
             value: tech-skills-microservice
+          - name: GRADES_PATH
+            value: grades-microservice
         imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1

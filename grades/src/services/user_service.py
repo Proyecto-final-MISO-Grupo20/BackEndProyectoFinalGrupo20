@@ -13,7 +13,7 @@ async def validate_user_type(request: Request, user_id, user_type):
 
     user = await get_user(request, user_id)
 
-    if (user_type == 'business' and user.rol != 3) or (user_type == 'candidate' and user.rol != 2):
+    if (user_type == 'business' and user.get('rol') != 3) or (user_type == 'candidate' and user.get('rol') != 2):
         raise HTTPException(status_code=HTTPStatus.FORBIDDEN,
                             detail='El usuario no tiene el ROL requerido para realizar esta acción')
 
