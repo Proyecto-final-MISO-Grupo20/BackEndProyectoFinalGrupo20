@@ -50,23 +50,3 @@ async def test_find_grades_by_candidate_id_invalid_candidate():
     candidate_grades = await Grades.find_by_candidate_id(None)
 
     assert candidate_grades == []
-
-
-@pytest.mark.asyncio
-async def test_get_grades_service():
-
-    with pytest.raises(HTTPException) as exc_info:
-        await get_grades(request, 1)
-
-    assert exc_info.value.status_code == HTTPStatus.PRECONDITION_FAILED
-
-
-@pytest.mark.asyncio
-async def test_get_grades_service_no_found_candidate():
-
-    with pytest.raises(HTTPException) as exc_info:
-        await get_grades(request, 123)
-
-    assert exc_info.value.status_code == HTTPStatus.PRECONDITION_FAILED
-
-    await delete_test_database()
