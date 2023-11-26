@@ -2,7 +2,7 @@ from fastapi import HTTPException, Request
 import requests
 from http import HTTPStatus
 
-from src.models import Usuario, Empresa, Candidato
+from src.models import Empresa, Candidato
 
 
 async def get_request(path: str, request: Request):
