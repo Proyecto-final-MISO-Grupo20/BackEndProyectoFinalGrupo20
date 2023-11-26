@@ -75,6 +75,14 @@ services:
     env_file: ./grades/.env
     depends_on:
       - ABCJobs_db
+  
+  contratos-microservice:
+  container_name: contratos-microservice
+  build: ./contratos
+  working_dir: /contratos_microservice/
+  env_file: ./contratos/.env
+  depends_on:
+    - ABCJobs_db
 
   nginx:
     container_name: nginx
