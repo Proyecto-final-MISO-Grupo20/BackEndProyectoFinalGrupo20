@@ -1,6 +1,7 @@
 from fastapi import HTTPException, Request
 from http import HTTPStatus
 
+from src.services.grades_service import candidate_grades, grades_of_candidate
 from src.services.skills_service import candidate_skills
 from src.dtos import CreateCandidatoDto, ResponseDto, CreateCandidatoResponseDto, GetCandidatesDto
 from src.models import Candidato, Usuario
@@ -51,8 +52,8 @@ async def create_candidato(data: CreateCandidatoDto) -> ResponseDto:
     return ResponseDto(body, status_code)
 
 
-async def get_candidates(request: Request, user_id: str):
-    usuario = await validate_user_type(user_id, 'business')
+async def get_candidates(request: Request, user_id: int):
+    await validate_user_type(user_id, 'business')
     candidates_list = await Candidato.list()
 
     if not candidates_list:
@@ -72,10 +73,13 @@ async def get_candidates(request: Request, user_id: str):
 
         candidate_skills_response = await candidate_skills(candidate.id, request)
 
+        candidate_grades_response = await grades_of_candidate(request, candidate.id, user_id)
+
         candidate_data = GetCandidatesDto(
             candidate.id, candidate.usuarioId, candidate.fecha_nacimiento, candidate.telefono, candidate.pais,
             candidate.ciudad, user.nombre, user.tipo_documento, user.documento, user.email,
-            candidate_skills_response
+            candidate_skills_response,
+            candidate_grades_response
         )
 
         candidates_response.append(candidate_data)

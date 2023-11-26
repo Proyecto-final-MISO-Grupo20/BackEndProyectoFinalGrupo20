@@ -11,3 +11,5 @@ from .skills_data_response_dto import SkillsDataResponseDto
 from .get_candidates_dto import GetCandidatesDto
 from .get_candidates_list_dto import GetCandidatesListDto
 from .get_user_dto import GetUserDto
+from .grades_dto import GradesDto
+from .get_grades_response_dto import GetGradesResponseDto

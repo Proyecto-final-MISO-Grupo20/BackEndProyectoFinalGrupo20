@@ -1,7 +1,8 @@
 from datetime import date
 from dataclasses import dataclass
 
-from src.dtos import SkillsDataResponseDto
+from .skills_data_response_dto import SkillsDataResponseDto
+from .get_grades_response_dto import GetGradesResponseDto
 
 
 @dataclass
@@ -17,5 +18,4 @@ class GetCandidatesDto:
     documento: str
     email: str
     skills: [SkillsDataResponseDto]
-
-    
+    grades: [GetGradesResponseDto]
