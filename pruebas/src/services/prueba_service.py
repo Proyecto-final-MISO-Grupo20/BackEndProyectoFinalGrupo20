@@ -58,7 +58,7 @@ async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
     try:
         postulaciones = await Postulacion.get_by_candidato_and_oferta(' ', oferta_id)
         postulaciones_response = []
-        if postulaciones == None:
+        if postulaciones is None:
             print('----------------------------------------2')
             status_code=HTTPStatus.NOT_FOUND
             body= {'detail':'La oferta no tiene postulaciones'}
