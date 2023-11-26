@@ -1,0 +1,1 @@
+from .contrato_candidato import ContratoCandidato

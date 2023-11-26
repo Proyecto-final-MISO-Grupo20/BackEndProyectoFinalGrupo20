@@ -58,7 +58,6 @@ async def list_offers() -> ResponseDto:
     status_code: int = HTTPStatus.OK
 
     try:
-        print('---------------------------------------')
         body = await Oferta.list("DISPONIBLE")   
 
     except Exception as e:
@@ -72,7 +71,6 @@ async def list_offers_by_project(project_id: int) -> ResponseDto:
     status_code: int = HTTPStatus.OK
 
     try:
-        print('---------------------------------------')
         body = await Oferta.listByProject(project_id)  
 
     except Exception as e:
