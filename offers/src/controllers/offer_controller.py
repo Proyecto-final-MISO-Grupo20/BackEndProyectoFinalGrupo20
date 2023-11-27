@@ -26,6 +26,18 @@ async def crear_offer(
 
     return response_object.body
 
+@router.put('/{offer_id}')
+async def update_offer(response: Response, offer_id: int) -> Response:
+
+
+    response_object: ResponseDto = await offers_service.update_offer(
+        offer_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body
+
+
 @router.get('')
 async def list_offer(response: Response, user_id=Depends(get_token_header)
 ) -> Response:

@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=ABCJobs
     ports:
-      - "5432:5432"
+      - "5436:5432"
     volumes:
       - ./ABCJobs/:/db/
 
@@ -99,3 +99,4 @@ services:
       - offers-microservice
       - entrevistas-microservice
       - grades-microservice
+      - contratos-microservice

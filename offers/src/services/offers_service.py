@@ -44,6 +44,26 @@ async def create_offer(data, project_id: int, user_id: int) -> ResponseDto:
 
     return ResponseDto(body, status_code)
 
+async def update_offer(offer_id: int) -> ResponseDto:
+    body: str or dict = ''
+    status_code: HTTPStatus = HTTPStatus.OK
+
+    try:
+        
+        offer = await Oferta.get(id=offer_id)
+        offer.estado = "CONTRATADO"
+        await offer.save()
+
+        skills_responses = []
+
+        body = CreateOfferResponseDto(offer.id, offer.perfil, offer.proyecto_id, offer.estado, skills_responses)
+
+    except Exception as exception:
+        raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED,
+                            detail=f'{exception}')
+
+    return ResponseDto(body, status_code)
+
 
 def validate_body(get_post_data):
     data_keys = [key for key in get_post_data]

@@ -16,7 +16,17 @@ async def registrar_contrato_candidato(request: Request, response: Response, ofe
 
     data: CreateContratoDto = await request.json()
 
-    response_object: ResponseDto = await contrato_service.registrar_contrato_candidato(data, oferta_id)
+    response_object: ResponseDto = await contrato_service.registrar_contrato_candidato(request, data, oferta_id)
+
+    response.status_code = response_object.status_code
+
+    return response_object.body
+
+@router.get('/{oferta_id}')
+async def obtener_candidato(response: Response, oferta_id) -> Response:
+
+
+    response_object: ResponseDto = await contrato_service.obtener_candidato(oferta_id)
 
     response.status_code = response_object.status_code
 
