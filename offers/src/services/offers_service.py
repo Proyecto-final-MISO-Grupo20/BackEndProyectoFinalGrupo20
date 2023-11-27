@@ -1,8 +1,9 @@
 from fastapi import HTTPException
 from http import HTTPStatus
 
-from src.dtos import ResponseDto, CreateOfferResponseDto, GetOfferDto, SkillsDataResponseDto
+from src.dtos import ResponseDto, CreateOfferResponseDto, GetOfferDto, SkillsDataResponseDto, GetOffersResponseDto
 from src.models import Oferta, SkillsOferta
+from src.services.contracts_service import get_contract
 
 
 async def create_offer(data, project_id: int, user_id: int) -> ResponseDto:
@@ -86,15 +87,25 @@ async def list_offers() -> ResponseDto:
 
     return ResponseDto(body, status_code)
 
-async def list_offers_by_project(project_id: int) -> ResponseDto:
-    body: str or dict = ''
-    status_code: int = HTTPStatus.OK
 
+async def list_offers_by_project(request, project_id: int) -> ResponseDto:
     try:
-        body = await Oferta.listByProject(project_id)  
+        offers = await Oferta.list_by_project_id(project_id)
+
+        offers_response = []
+
+        for offer in offers:
+            hired_candidate = ''
+            if offer.estado == 'CONTRATADO':
+                candidate = await get_contract(request, offer.id)
+                hired_candidate = candidate.get('candidato_id')
+
+            offers_response.append(GetOffersResponseDto(
+                offer.id, offer.perfil, offer.proyecto_id, offer.estado, hired_candidate
+            ))
 
     except Exception as e:
         raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-                            detail=e)
+                            detail=str(e))
 
-    return ResponseDto(body, status_code)
+    return ResponseDto(offers_response, HTTPStatus.OK)

@@ -6,7 +6,6 @@ from src.enums import EstadoOferta
 
 
 class Oferta(Model):
-
     id = IntField(pk=True)
     perfil = CharField(max_length=255)
     proyecto_id = IntField()
@@ -31,12 +30,12 @@ class Oferta(Model):
             ofertas = await cls.filter(estado=estado_oferta)
 
         return ofertas
-    
+
     @classmethod
-    async def listByProject(cls, proyecto: int):
-        ofertas: list = []
+    async def list_by_project_id(cls, project_id: int):
+        offers: list = []
 
-        
-        ofertas = await cls.filter(proyecto_id=proyecto)
+        if project_id is not None:
+            offers = await cls.filter(proyecto_id=project_id)
 
-        return ofertas
+        return offers

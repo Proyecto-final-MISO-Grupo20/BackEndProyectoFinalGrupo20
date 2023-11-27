@@ -32,6 +32,8 @@ spec:
                 key: db_app_uri
           - name: AUTH_PATH
             value: auth-microservice
+          - name: CONTRACTS_PATH
+            value: contratos-microservice
         imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1
