@@ -11,6 +11,7 @@ class ContratoCandidato(Model):
     fecha_fin = DatetimeField(auto_now_add=True)
     valor = IntField()
     ofertaId = IntField()
+    candidatoId = IntField()
     
     async def save(self, *args, **kwargs):
         await super().save(*args, **kwargs)
