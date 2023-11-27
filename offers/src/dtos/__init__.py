@@ -5,3 +5,4 @@ from .get_offer_dto import GetOfferDto
 from .response_dto import ResponseDto
 from .skills_data_dto import SkillsDataDto
 from .skills_data_response_dto import SkillsDataResponseDto
+from .get_offers_response_dto import GetOffersResponseDto

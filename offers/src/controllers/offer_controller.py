@@ -15,7 +15,6 @@ def validate_health() -> str:
 async def crear_offer(
         request: Request, response: Response, project_id: int, user_id=Depends(get_token_header)
 ) -> Response:
-
     data: GetOfferDto = await request.json()
 
     response_object: ResponseDto = await offers_service.create_offer(
@@ -26,10 +25,9 @@ async def crear_offer(
 
     return response_object.body
 
+
 @router.put('/{offer_id}')
 async def update_offer(response: Response, offer_id: int) -> Response:
-
-
     response_object: ResponseDto = await offers_service.update_offer(
         offer_id)
 
@@ -40,19 +38,19 @@ async def update_offer(response: Response, offer_id: int) -> Response:
 
 @router.get('')
 async def list_offer(response: Response, user_id=Depends(get_token_header)
-) -> Response:
-
+                     ) -> Response:
     response_object: ResponseDto = await offers_service.list_offers()
 
     response.status_code = response_object.status_code
 
     return response_object.body
 
-@router.get('/{project_id}')
-async def list_offer_by_project(response: Response, project_id: int, user_id=Depends(get_token_header)
-) -> Response:
 
-    response_object: ResponseDto = await offers_service.list_offers_by_project(project_id)
+@router.get('/{project_id}')
+async def list_offer_by_project(
+        request: Request, response: Response, project_id: int, user_id=Depends(get_token_header)
+) -> Response:
+    response_object: ResponseDto = await offers_service.list_offers_by_project(request, project_id)
 
     response.status_code = response_object.status_code
 

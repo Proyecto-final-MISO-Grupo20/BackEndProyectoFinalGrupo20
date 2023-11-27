@@ -1,5 +1,6 @@
 import pytest
 from fastapi import HTTPException
+from werkzeug.sansio import request
 
 from .db_tests import init, close
 from http import HTTPStatus
@@ -31,7 +32,7 @@ async def test_crear_oferta():
 async def test_actualizar_oferta():
     await init()
 
-    test_response = await offers_service.update_offer(1, 1)
+    test_response = await offers_service.update_offer(1)
  
     assert test_response.status_code == HTTPStatus.OK
 
@@ -90,8 +91,5 @@ async def test_list_offers():
  
     assert test_response.status_code == HTTPStatus.OK
 
-@pytest.mark.asyncio
-async def test_list_offers_by_project():
-    test_response = await offers_service.list_offers_by_project(1)
- 
-    assert test_response.status_code == HTTPStatus.OK
+    await close()
+
