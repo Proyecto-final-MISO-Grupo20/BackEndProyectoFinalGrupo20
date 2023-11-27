@@ -32,6 +32,8 @@ spec:
                 key: usuarios_uri
           - name: AUTH_PATH
             value: auth-microservice
+          - name: OFFERS_PATH
+            value: offers-microservice
         imagePullPolicy: Always
 ---
 apiVersion: cloud.google.com/v1
