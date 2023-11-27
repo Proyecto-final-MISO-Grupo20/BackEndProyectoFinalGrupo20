@@ -2,6 +2,8 @@ from tortoise.models import Model
 from tortoise.fields import IntField, CharField, BooleanField, DatetimeField
 from tortoise.exceptions import ValidationError, DoesNotExist
 
+from src.dtos import GetUserDto
+
 
 class Usuario(Model):
 
@@ -25,4 +27,11 @@ class Usuario(Model):
         except DoesNotExist:
             return None
 
-
+    @classmethod
+    async def get_by_id(cls, user_id):
+        try:
+            user = await cls.get(id=user_id)
+            user_data = GetUserDto(user.id, user.nombre, user.tipo_documento, user.documento, user.email, user.rol)
+            return user_data
+        except DoesNotExist:
+            return None

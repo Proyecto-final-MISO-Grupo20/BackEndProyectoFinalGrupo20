@@ -86,16 +86,16 @@ async def test_get_project_precondition_failed():
     await close()
 
 
-@pytest.mark.asyncio
-async def test_get_project_not_found_user():
-    await init()
-    await test_create_proyecto()
-
-    test_response = await proyecto_service.get_project(1, 123)
-
-    assert test_response.status_code == HTTPStatus.BAD_REQUEST
-
-    await close()
+# @pytest.mark.asyncio
+# async def test_get_project_not_found_user():
+#     await init()
+#     await test_create_proyecto()
+#
+#     test_response = await proyecto_service.get_project(1, 123)
+#
+#     assert test_response.status_code == HTTPStatus.BAD_REQUEST
+#
+#     await close()
 
 
 @pytest.mark.asyncio

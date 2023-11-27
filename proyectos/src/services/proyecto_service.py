@@ -2,13 +2,12 @@ from fastapi import HTTPException
 from http import HTTPStatus
 
 from src.dtos import CreateProyectoDto, ResponseDto
-from src.models import Usuario, Empresa, Proyecto
-import json
-import asyncio
+from src.models import Usuario, Empresa, Proyecto, Proyecto_Empleado
+
 
 async def create_proyecto(data: CreateProyectoDto, user_id: int) -> ResponseDto:
     body: str or dict = ''
-    status_code: int = HTTPStatus.CREATED
+    status_code = HTTPStatus.CREATED
 
     data_keys = [key for key in data]
     proyecto_keys = CreateProyectoDto.get_attributes(None)
@@ -39,9 +38,10 @@ async def create_proyecto(data: CreateProyectoDto, user_id: int) -> ResponseDto:
 
     return ResponseDto(body, status_code)
 
+
 async def list_proyectos(user_id: int) -> ResponseDto:
     body: str or dict = ''
-    status_code: int = HTTPStatus.OK
+    status_code = HTTPStatus.OK
 
     try:
         # Se obtiene la empresa por medio del usuario
@@ -65,13 +65,7 @@ async def get_project(project_id: int, user_id: int) -> ResponseDto:
     status_code = HTTPStatus.OK
 
     try:
-        empresa = await Empresa.findByUserId(user_id)
-
-        if not empresa:
-            status_code = HTTPStatus.BAD_REQUEST
-            body = {'detail': 'El usuario no tiene el ROL para crear un Proyecto.'}
-        else:
-            body = await Proyecto.find_by_id(project_id)
+        body = await Proyecto.find_by_id(project_id)
 
     except Exception as exception:
         raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED,

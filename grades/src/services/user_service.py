@@ -26,4 +26,4 @@ async def get_user(request: Request, user_id):
     user: GetUserDto = get_user_response.get('body')
     validate_response(get_user_response.get('status_code'), user)
 
-    return get_user_response.get('body')
+    return user

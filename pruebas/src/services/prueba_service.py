@@ -58,7 +58,7 @@ async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
     try:
         postulaciones = await Postulacion.get_by_candidato_and_oferta(' ', oferta_id)
         postulaciones_response = []
-        if postulaciones == None:
+        if postulaciones is None:
             print('----------------------------------------2')
             status_code=HTTPStatus.NOT_FOUND
             body= {'detail':'La oferta no tiene postulaciones'}
@@ -71,10 +71,11 @@ async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
                 usuario = await Usuario.find_by_id(candidato.usuarioId)
                 postResultados = await Postulacion_Prueba.get_by_postulacionId(postulacion.id)
                 pruebas_response = []
-                for j in range(len(postResultados)):
-                    postResultado = postResultados[j]
-                    prueba = await Prueba.find_by_id(postResultado.pruebaId)
-                    pruebas_response.append(PruebaDto(prueba.nombre, prueba.tipo, postResultado.calificacion, postResultado.comentario))
+                if postResultados is not None:
+                    for j in range(len(postResultados)):
+                        postResultado = postResultados[j]
+                        prueba = await Prueba.find_by_id(postResultado.pruebaId)
+                        pruebas_response.append(PruebaDto(prueba.nombre, prueba.tipo, postResultado.calificacion, postResultado.comentario))
 
                 postulaciones_response.append(PostulacionDto(candidato.id, usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
                 return GetPostulacionResponseDto(postulaciones_response, status_code)
