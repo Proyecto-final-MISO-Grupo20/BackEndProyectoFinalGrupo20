@@ -28,6 +28,15 @@ async def test_crear_oferta():
 
 
 @pytest.mark.asyncio
+async def test_actualizar_oferta():
+    await init()
+
+    test_response = await offers_service.update_offer(1, 1)
+ 
+    assert test_response.status_code == HTTPStatus.OK
+
+
+@pytest.mark.asyncio
 async def test_crear_oferta_usuario_no_autorizado():
     await init()
 

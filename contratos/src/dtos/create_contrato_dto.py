@@ -6,6 +6,7 @@ from decimal import Decimal
 @dataclass
 class CreateContratoDto:
     fecha_inicio: date
+    candidato_id: int
     meses: int
     valor: int
 
