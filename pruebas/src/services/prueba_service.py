@@ -59,7 +59,6 @@ async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
         postulaciones = await Postulacion.get_by_candidato_and_oferta(' ', oferta_id)
         postulaciones_response = []
         if postulaciones is None:
-            print('----------------------------------------2')
             status_code=HTTPStatus.NOT_FOUND
             body= {'detail':'La oferta no tiene postulaciones'}
             return ResponseDto(body, status_code)        
@@ -77,13 +76,11 @@ async def consultar_postulaciones_oferta(oferta_id: int) -> ResponseDto:
                         prueba = await Prueba.find_by_id(postResultado.pruebaId)
                         pruebas_response.append(PruebaDto(prueba.nombre, prueba.tipo, postResultado.calificacion, postResultado.comentario))
 
-                postulaciones_response.append(PostulacionDto(candidato.id, usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
-                return GetPostulacionResponseDto(postulaciones_response, status_code)
+                postulaciones_response.append(PostulacionDto(postulacion.id, usuario.nombre, usuario.email, candidato.telefono, pruebas_response))
+            return GetPostulacionResponseDto(postulaciones_response, status_code)
             
        
     except Exception as exception:
-        print('----------------------------------------')
-        print(exception)
         raise HTTPException(status_code=HTTPStatus.PRECONDITION_FAILED, 
                             detail=f'{exception}')
 
