@@ -1,0 +1,2635 @@
+{
+	"info": {
+		"_postman_id": "79958c7a-0b08-4c69-bbf2-389251c1023f",
+		"name": "ABCJobs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30808251",
+		"_collection_link": "https://grupo-maestria-los-andes.postman.co/workspace/Team-Workspace~963fae1e-877e-4aa7-8825-52dd4cb3ec74/collection/30808307-79958c7a-0b08-4c69-bbf2-389251c1023f?action=share&source=collection_link&creator=30808251"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create Candidate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ciudad\": \"Bogota\",\n\t\"documento\": \"12345678\",\n\t\"email\": \"rd.ortizr1@uniandes.edu.co\",\n\t\"fecha_nacimiento\": \"1999-06-02T05:00:00.000Z\",\n\t\"nombre\": \"Rafael\",\n\t\"pais\": \"Colombia\",\n\t\"password\": \"12345678\",\n\t\"passwordConfirm\": \"12345678\",\n\t\"telefono\": 12345,\n\t\"tipo_documento\": 0,\n\t\"username\": \"rafael\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/candidato",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"candidato"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Candidate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ciudad\": \"Bogota\",\n\t\"documento\": \"12345678\",\n\t\"email\": \"rd.ortizr1@uniandes.edu.co\",\n\t\"fecha_nacimiento\": \"1999-06-02T05:00:00.000Z\",\n\t\"nombre\": \"Rafael\",\n\t\"pais\": \"Colombia\",\n\t\"password\": \"12345678\",\n\t\"passwordConfirm\": \"12345678\",\n\t\"telefono\": 12345,\n\t\"tipo_documento\": 0,\n\t\"username\": \"rafael\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/candidato",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"candidato"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n\t\"username\": \"rafael\"\n}"
+						},
+						{
+							"name": "Create Candidate Cesar",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ciudad\": \"Cúcuta\",\n\t\"documento\": \"45674567\",\n\t\"email\": \"c.riverao@uniandew.edu.co\",\n\t\"fecha_nacimiento\": \"1999-06-02T05:00:00.000Z\",\n\t\"nombre\": \"Cesar Rivera\",\n\t\"pais\": \"Colombia\",\t\n\t\"telefono\": \"12345\",\n\t\"tipo_documento\": \"0\",\n\t\"username\": \"criverao\",\n    \"password\": \"12345678\",\n    \"passwordConfirm\": \"12345678\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/candidato",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"candidato"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Nov 2023 20:17:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "23"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"criverao\"\n}"
+						},
+						{
+							"name": "Create Candidate John",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ciudad\": \"Cúcuta\",\n\t\"documento\": \"45674567\",\n\t\"email\": \"c.riverao@uniandew.edu.co\",\n\t\"fecha_nacimiento\": \"1999-06-02T05:00:00.000Z\",\n\t\"nombre\": \"Cesar Rivera\",\n\t\"pais\": \"Colombia\",\t\n\t\"telefono\": \"12345\",\n\t\"tipo_documento\": \"0\",\n\t\"username\": \"criverao\",\n    \"password\": \"12345678\",\n    \"passwordConfirm\": \"12345678\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/candidato",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"candidato"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Nov 2023 20:17:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "23"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"criverao\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Business",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ciudad\": \"Bogotá\",\n\t\"direccion\": \"calle 1\",\n\t\"documento\": \"123\",\n\t\"email\": \"empresa1@m.com\",\n\t\"nombre\": \"empresa\",\n\t\"pais\": \"Colombia\",\n\t\"password\": \"12345678\",\n\t\"passwordConfirm\": \"12345678\",\n\t\"segmentoId\": 3,\n\t\"tipo_documento\": 0,\n\t\"tipoEmpresaId\": 2,\n\t\"username\": \"empresa1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/empresa",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"empresa"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Business",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"ciudad\": \"Bogotá\",\n\t\"direccion\": \"calle 1\",\n\t\"documento\": \"123\",\n\t\"email\": \"empresa1@m.com\",\n\t\"nombre\": \"empresa\",\n\t\"pais\": \"Colombia\",\n\t\"password\": \"12345678\",\n\t\"passwordConfirm\": \"12345678\",\n\t\"segmentoId\": 3,\n\t\"tipo_documento\": 0,\n\t\"tipoEmpresaId\": 2,\n\t\"username\": \"empresa1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/empresa",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"empresa"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"empresa1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Candidate adds one skill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"skill\": 1,\n\t\"nivel_dominio\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/skills",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"skills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/usuarios/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get candidates",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/candidatos",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"candidatos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Business Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/empresa/tipos",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"empresa",
+								"tipos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Business Types",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/tipoEmpresa",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"tipoEmpresa"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"tipo\": \"privada\"\n    },\n    {\n        \"id\": 2,\n        \"tipo\": \"Publica\"\n    },\n    {\n        \"id\": 3,\n        \"tipo\": \"mixta\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Business Segments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/empresa/segmentos",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"empresa",
+								"segmentos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Business Segments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/segmentos",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"segmentos"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"segmento\": \"Salud\"\n    },\n    {\n        \"id\": 2,\n        \"segmento\": \"Tecnologia\"\n    },\n    {\n        \"id\": 3,\n        \"segmento\": \"Aeronautica\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get skills of candidate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/skills/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"skills",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get skills of candidate",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/skills/{{user_id}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"skills",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Nov 2023 21:42:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {        \n        \"id\": \"1\",\n        \"tipo\": \"IDIOMA\",\n        \"skills\": [\n            {\n                \"id\": 1,\n                \"nombre\": \"Inglés\",\n                \"nivel_dominio\": 5\n            },\n            {\n                \"id\": 2,\n                \"nombre\": \"Español\",\n                \"nivel_dominio\": 5\n            }\n        ]\n    },\n    {\n        \"id\": \"2\",\n        \"tipo\": \"HERRAMIENTA\",\n        \"skills\": [\n            {\n                \"id\": 3,\n                \"nombre\": \"Excel\",\n                \"nivel_dominio\": 5\n            }\n        ]\n    },\n    {\n        \"id\": \"3\",\n        \"tipo\": \"HABILIDAD\",\n        \"skills\": [\n            {\n                \"id\": 4,\n                \"nombre\": \"Trabajo en equipos\",\n                \"nivel_dominio\": 5\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get skills of authenticated candidate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/skills",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"skills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{USERS_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{USERS_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Health",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{USERS_PATH}}/ping",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{USERS_PATH}}"
+									],
+									"path": [
+										"ping"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "\"pong\""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Test",
+			"item": [
+				{
+					"name": "Asociate Candidate to Offer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ofertaId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{TEST_PATH}}/candidato",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{TEST_PATH}}"
+							],
+							"path": [
+								"candidato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register test",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postulacionId\": 36,\r\n    \"calificacion\": 20,\r\n    \"comentario\": \"Faltan conocimientos\",\r\n    \"tipo\": 1,\r\n    \"nombre\": \"Prueba tecnica\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{TEST_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{TEST_PATH}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Candidate Tests by Offer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{TEST_PATH}}/2/postulaciones",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{TEST_PATH}}"
+							],
+							"path": [
+								"2",
+								"postulaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{TEST_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{TEST_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set('token', jsonData.token);",
+									"",
+									"tests[\"Status should be 200\"] = responseCode.code == 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"juanjo\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/login",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{AUTH_PATH}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Authenticate candidate",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"rafael\",\n    \"password\": \"12345678\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/login",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{AUTH_PATH}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Nov 2023 20:27:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "274"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTA0MzI1NCwianRpIjoiMmUxMzVmZjItNDEyNS00MzBjLWIxMDQtNDFmMWViNTcyNDViIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MywibmJmIjoxNjk5MDQzMjU0LCJleHAiOjE2OTkwNjEyNTR9.uoHYSLjlKVXLlxMKmROENp1fkyVR97eSxkPMl5Bac1Y\"\n}"
+						},
+						{
+							"name": "Authenticate business",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"empresa1\",\n    \"password\": \"12345678\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/login",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{AUTH_PATH}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Nov 2023 01:14:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "274"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTA2MDQ2NywianRpIjoiZWZjNzY0OWYtOGYwYi00ODNkLTkwZmMtZmYxMWRjYzgxZGIwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjk5MDYwNDY3LCJleHAiOjE2OTkwNzg0Njd9.a-L1G_n23HQp2zvrsgdIBgvT3ooePGRNc2xj0J-XJJ8\"\n}"
+						},
+						{
+							"name": "Authenticate with incorrect credential",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/login",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{AUTH_PATH}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Nov 2023 03:25:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Email or password are incorrect\"\n}"
+						},
+						{
+							"name": "Authenticate without all fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"username\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/login",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{AUTH_PATH}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Nov 2023 03:25:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"La petición no contiene todos los campos requeridos.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status should be 200\"] = responseCode.code == 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/me",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{AUTH_PATH}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/me",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{AUTH_PATH}}"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Nov 2023 03:27:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "257"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"documento\": \"45674567\",\n    \"email\": \"c.riverao@uniandew.edu.co\",\n    \"id\": 1,\n    \"nombre\": \"Cesar Rivera\",\n    \"password\": \"pbkdf2:sha256:260000$u65pSRMvh46SiXBA$b08b76ae399ce6c631c4ea53e3415f41d0d90eaefd0e8c61d71237269ed12c50\",\n    \"rol\": 2,\n    \"tipo_documento\": 0,\n    \"username\": \"criverao\"\n}"
+						},
+						{
+							"name": "Get user without token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/me",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{AUTH_PATH}}"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Nov 2023 03:28:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Error\": \"El token no es válido o está vencido.\"\n}"
+						},
+						{
+							"name": "Get user with an invalid token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/me",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{AUTH_PATH}}"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Nov 2023 03:29:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Token invalido\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status should be 200\"] = responseCode.code == 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{AUTH_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{AUTH_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Create Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Proyecto de prueba\",\r\n    \"descripcion\":\"Este es un proyecto de prueba\",\r\n    \"codigo\":123\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{PROJECTS_PATH}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Project1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Sitio web de comercio electrónico\",\r\n    \"descripcion\": \"Desarrollar un sitio web de comercio electrónico para una tienda en línea\",\r\n    \"codigo\": 456\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{PROJECTS_PATH}}"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Create Project2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Desarrollo de aplicaciones móviles\",\r\n    \"descripcion\": \"Crear una aplicación móvil para gestionar las finanzas personales\",\r\n    \"codigo\": 789\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{PROJECTS_PATH}}"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Create Project3",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Herramienta de análisis de datos\",\r\n    \"descripcion\": \"Construir una herramienta para analizar y visualizar grandes conjuntos de datos\",\r\n    \"codigo\": 1011\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{PROJECTS_PATH}}"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Create Project4",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Migración a la nube\",\r\n    \"descripcion\": \"Migrar servidores locales a una infraestructura en la nube\",\r\n    \"codigo\": 1213\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{PROJECTS_PATH}}"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Prueba\",\r\n    \"tipo_documento\": 1,\r\n    \"documento\": \"123456\",\r\n    \"cargo\":\"Prueba\",\r\n    \"email\":\"prueba@ejemplo.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}/empleado",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{PROJECTS_PATH}}"
+							],
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{PROJECTS_PATH}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Project By Business",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{PROJECTS_PATH}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Employe By Business Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}/empleados/list",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{PROJECTS_PATH}}"
+							],
+							"path": [
+								"empleados",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{PROJECTS_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{PROJECTS_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "Create a skill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Inglés\",\n    \"tipo\": \"IDIOMA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{SKILLS_PATH}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create ingles",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Inglés\",\n    \"tipo\": \"IDIOMA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{SKILLS_PATH}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 15:58:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nombre\": \"Inglés\",\n    \"tipo\": \"IDIOMA\"\n}"
+						},
+						{
+							"name": "Create español",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Español\",\n    \"tipo\": \"IDIOMA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{SKILLS_PATH}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 15:58:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nombre\": \"Inglés\",\n    \"tipo\": \"IDIOMA\"\n}"
+						},
+						{
+							"name": "Create herramienta1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Visual Studio Code\",\n    \"tipo\": \"HERRAMIENTA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{SKILLS_PATH}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 15:58:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nombre\": \"Inglés\",\n    \"tipo\": \"IDIOMA\"\n}"
+						},
+						{
+							"name": "Create herramienta2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Github\",\n    \"tipo\": \"HERRAMIENTA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{SKILLS_PATH}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 16:01:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"nombre\": \"Github\",\n    \"tipo\": \"HERRAMIENTA\"\n}"
+						},
+						{
+							"name": "Create habilidad1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Trabajo en equipo\",\n    \"tipo\": \"HABILIDAD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{SKILLS_PATH}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 16:02:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"nombre\": \"Trabajo en equipo\",\n    \"tipo\": \"HABILIDAD\"\n}"
+						},
+						{
+							"name": "Create habilidad2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Liderazgo\",\n    \"tipo\": \"HABILIDAD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{SKILLS_PATH}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 16:03:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"nombre\": \"Liderazgo\",\n    \"tipo\": \"HABILIDAD\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all skills",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{SKILLS_PATH}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all tools",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}/herramientas",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{SKILLS_PATH}}"
+							],
+							"path": [
+								"herramientas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all habilities",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}/habilidades",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{SKILLS_PATH}}"
+							],
+							"path": [
+								"habilidades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all languages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}/idiomas",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{SKILLS_PATH}}"
+							],
+							"path": [
+								"idiomas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{SKILLS_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{SKILLS_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Offers",
+			"item": [
+				{
+					"name": "Create an offer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"perfil\": \"Desarrollador de software\",\n    \"skills\": [\n        {\n            \"skill_id\": \"1\",\n            \"dominio\": \"5\"\n        },\n        {\n            \"skill_id\": \"2\",\n            \"dominio\": \"4\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/{{project_id}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							],
+							"path": [
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create a skill Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"perfil\": \"Desarrollador de backend\",\n    \"skills\": [\n        {\n            \"skill_id\": \"1\",\n            \"dominio\": \"5\"\n        },\n        {\n            \"skill_id\": \"3\",\n            \"dominio\": \"4\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/{{project_id}}",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{OFFERS_PATH}}"
+									],
+									"path": [
+										"{{project_id}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.3"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 05 Nov 2023 17:55:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"perfil\": \"Desarrollador de software\",\n    \"proyecto_id\": 1,\n    \"estado\": \"DISPONIBLE\",\n    \"skills\": [\n        {\n            \"skill_id\": \"1\",\n            \"dominio\": \"5\"\n        },\n        {\n            \"skill_id\": \"2\",\n            \"dominio\": \"4\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add skills to offer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\n    {\n        \"skill_id\": \"1\",\n        \"dominio\": \"5\"\n    },\n    {\n        \"skill_id\": \"2\",\n        \"dominio\": \"4\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/{{project_id}}/{{offer_id}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							],
+							"path": [
+								"{{project_id}}",
+								"{{offer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get skills of offer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/{{project_id}}/{{offer_id}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							],
+							"path": [
+								"{{project_id}}",
+								"{{offer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list Offers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list Offers By Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/{{project_id}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							],
+							"path": [
+								"{{project_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar estado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contratos",
+			"item": [
+				{
+					"name": "Create contrato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fecha_inicio\": 20231001,\n    \"candidato_id\": 1,\n    \"meses\": 12,\n    \"valor\": 25000000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{CONTRATOS_PATH}}/{{offer_id}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{CONTRATOS_PATH}}"
+							],
+							"path": [
+								"{{offer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{OFFERS_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{OFFERS_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get candidate by Offer_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{CONTRATOS_PATH}}/{{offer_id}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{CONTRATOS_PATH}}"
+							],
+							"path": [
+								"{{offer_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Entrevistas",
+			"item": [
+				{
+					"name": "Create an interview",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Entrevista Cal\",\n    \"fecha\":\"2023-12-06T05:00:00.000Z\",\n    \"usuarios\": [1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{INTERVIEWS_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{INTERVIEWS_PATH}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Qualify an interview",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"calificacion\": 5,\n    \"comentario\": \"LA entrevista fue excelente.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{INTERVIEWS_PATH}}/qualify",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{INTERVIEWS_PATH}}"
+							],
+							"path": [
+								"qualify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list Interviews By User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{INTERVIEWS_PATH}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{INTERVIEWS_PATH}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{INTERVIEWS_PATH}}/ping",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{INTERVIEWS_PATH}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Grades",
+			"item": [
+				{
+					"name": "Create grades",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"grade\": \"5\",\n    \"comment\": \"Este es un comentario de prueba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{GRADES_PATH}}/candidates/1/projects/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{GRADES_PATH}}"
+							],
+							"path": [
+								"candidates",
+								"1",
+								"projects",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get grades of candidate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{GRADES_PATH}}/candidates/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{GRADES_PATH}}"
+							],
+							"path": [
+								"candidates",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get grades of authenticated candidate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{GRADES_PATH}}/candidates",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{GRADES_PATH}}"
+							],
+							"path": [
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTA0MjcwMywianRpIjoiMjdmZmU0ZDMtOTBiMi00MzE5LWFhMTctMDAwNWU0NDUwODE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MywibmJmIjoxNjk5MDQyNzAzLCJleHAiOjE2OTkwNjA3MDN9.fgWyuzyAOpwmiJ1_tywj8WOxVoCoXHSyY4TbUC5jkb8"
+		},
+		{
+			"key": "project_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "offer_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
